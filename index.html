@@ -7,152 +7,172 @@
   <meta name="description" content="Indie game developer portfolio and game landing page" />
 
   <style>
-    :root {
-      --bg: #0e0e11;
-      --bg-soft: #16161c;
-      --text: #eaeaf0;
-      --muted: #a0a0b0;
-      --accent: #6cf2c2;
-    }
+  :root {
+    --bg: #1c1a17;
+    --bg-soft: #25221e;
+    --card: #2f2b26;
+    --text: #f5f1ea;
+    --muted: #c6bfb3;
+    --accent: #f2c38b;
+    --accent-soft: #e6b97a;
+  }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
+  body {
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    background: radial-gradient(circle at top, #26231f, var(--bg));
+    color: var(--text);
+    line-height: 1.7;
+  }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
 
-    /* ---------- HERO ---------- */
+  /* ---------- HERO ---------- */
 
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+    padding: 4rem 6vw;
+    align-items: center;
+    background:
+      linear-gradient(180deg, rgba(28,26,23,0.85), rgba(28,26,23,0.95)),
+      url("hero-image.jpg") center / cover no-repeat;
+  }
+
+  .hero-text h1 {
+    font-size: clamp(2.5rem, 4vw, 3.6rem);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-text p {
+    max-width: 480px;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 0.75rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    background: var(--accent);
+    color: #2a1f12;
+    box-shadow: 0 6px 20px rgba(242,195,139,0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(242,195,139,0.35);
+  }
+
+  .btn.secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid #4a433a;
+    box-shadow: none;
+  }
+
+  .hero-media {
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .hero-media img,
+  .hero-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ---------- SECTIONS ---------- */
+
+  section {
+    padding: 5rem 6vw;
+  }
+
+  section.alt {
+    background: var(--bg-soft);
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    max-width: 700px;
+    color: var(--muted);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .card {
+    background: var(--card);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+
+  .card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  footer {
+    padding: 2.5rem 6vw;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+
+  @media (max-width: 900px) {
     .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 3rem;
-      padding: 4rem 6vw;
-      align-items: center;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
-        url("hero-image.jpg") center / cover no-repeat;
-    }
-
-    .hero-text h1 {
-      font-size: clamp(2.5rem, 4vw, 4rem);
-      margin-bottom: 1rem;
+      grid-template-columns: 1fr;
+      text-align: center;
     }
 
     .hero-text p {
-      max-width: 500px;
-      color: var(--muted);
-      margin-bottom: 2rem;
+      margin-inline: auto;
     }
 
     .buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
+      justify-content: center;
     }
+  }
+</style>
 
-    .btn {
-      padding: 0.8rem 1.4rem;
-      border-radius: 6px;
-      font-weight: 600;
-      background: var(--accent);
-      color: #000;
-    }
-
-    .btn.secondary {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--muted);
-    }
-
-    .hero-media {
-      aspect-ratio: 16 / 9;
-      background: #000;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .hero-media img,
-    .hero-media video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* ---------- SECTIONS ---------- */
-
-    section {
-      padding: 5rem 6vw;
-      background: var(--bg);
-    }
-
-    section.alt {
-      background: var(--bg-soft);
-    }
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .card {
-      background: #000;
-      padding: 1.5rem;
-      border-radius: 10px;
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 6px;
-      margin-bottom: 1rem;
-    }
-
-    /* ---------- FOOTER ---------- */
-
-    footer {
-      padding: 2rem 6vw;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    /* ---------- RESPONSIVE ---------- */
-
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .hero-text p {
-        margin-inline: auto;
-      }
-
-      .buttons {
-        justify-content: center;
-      }
-    }
-  </style>
 </head>
 <body>
 
