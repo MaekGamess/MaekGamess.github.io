@@ -35,6 +35,29 @@
 
 
 </head>
+<script>
+const track = document.querySelector('.carousel-track');
+const images = document.querySelectorAll('.carousel img');
+const prevBtn = document.querySelector('.carousel-btn.prev');
+const nextBtn = document.querySelector('.carousel-btn.next');
+
+let index = 0;
+
+function updateCarousel() {
+    track.style.transform = `translateX(-${index * 420}px)`;
+}
+
+nextBtn.onclick = () => {
+    index = (index + 1) % images.length;
+    updateCarousel();
+};
+
+prevBtn.onclick = () => {
+    index = (index - 1 + images.length) % images.length;
+    updateCarousel();
+};
+</script>
+
 <body>
       <div class="buttons">
         <a href="https://play.google.com/store/apps/details?id=com.MaeKGames.StrikeBowling" class="btn">Google Play</a>
@@ -49,9 +72,19 @@
             <a href="/TikTak/" class="cta-btn">Play TikTak</a>
         </div>
 
-        <div class="hero-image">
+        
+    <!-- IMAGE CAROUSEL -->
+    <div class="carousel">
+        <div class="carousel-track">
             <img src="HeadIco.jpg" alt="Football minigame screenshot">
+            <img src="HeadIco2.jpg" alt="Gameplay preview">
+            <img src="HeadIco3.jpg" alt="Sports challenge preview">
         </div>
+
+        <button class="carousel-btn prev">❮</button>
+        <button class="carousel-btn next">❯</button>
+    </div>
+      
     </section>
 
     <!-- GAMES GRID -->
