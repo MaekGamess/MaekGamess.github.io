@@ -52,12 +52,12 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/WebBuild.loader.js";
+      var loaderUrl = buildUrl + "/LowBuildTikTak.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/WebBuild.data",
-        frameworkUrl: buildUrl + "/WebBuild.framework.js",
-        codeUrl: buildUrl + "/WebBuild.wasm",
+        dataUrl: buildUrl + "/LowBuildTikTak.data",
+        frameworkUrl: buildUrl + "/LowBuildTikTak.framework.js",
+        codeUrl: buildUrl + "/LowBuildTikTak.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "MaekGames",
         productName: "QatarFootballChallenge",
@@ -108,6 +108,7 @@
         canvas.style.height = "600px";
       }
 
+      canvas.style.background = "url('" + buildUrl + "/LowBuildTikTak.jpg') center / cover";
       document.querySelector("#unity-loading-bar").style.display = "block";
 
       var script = document.createElement("script");
