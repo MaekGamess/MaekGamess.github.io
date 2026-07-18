@@ -60,27 +60,34 @@
 
 
 	</head>
-<script>
-const track = document.querySelector('.carousel-track');
-const images = document.querySelectorAll('.carousel img');
-const prevBtn = document.querySelector('.carousel-btn.prev');
-const nextBtn = document.querySelector('.carousel-btn.next');
+	<script>
+		const track = document.querySelector('.carousel-track');
+		const images = document.querySelectorAll('.carousel img');
+		const prevBtn = document.querySelector('.carousel-btn.prev');
+		const nextBtn = document.querySelector('.carousel-btn.next');
 
-let index = 0;
+		let index = 0;
 
-function updateCarousel() {
-    track.style.transform = `translateX(-${index * 420}px)`;
-}
+		function updateCarousel() {
+		if (track) {
+		track.style.transform = `translateX(-${index * 420}px)`;
+		}
+		}
 
-nextBtn.onclick = () => {
-    index = (index + 1) % images.length;
-    updateCarousel();
-};
+		if (nextBtn && images.length > 0) {
+		nextBtn.onclick = () => {
+		index = (index + 1) % images.length;
+		updateCarousel();
+		};
+		}
 
-prevBtn.onclick = () => {
-    index = (index - 1 + images.length) % images.length;
-    updateCarousel();
-};
+		if (prevBtn && images.length > 0) {
+		prevBtn.onclick = () => {
+		index = (index - 1 + images.length) % images.length;
+		updateCarousel();
+		};
+		}
+	</script>
 </script>
 
 <body>
