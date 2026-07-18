@@ -34,10 +34,10 @@
 	<link rel="stylesheet" href="couruselStyle.css">
 
 		<!-- Firebase -->
-		<script src="https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js"></script>
+		<script type="module">
+			import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+			import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
 
-		<script>
 			const firebaseConfig = {
 			apiKey: "AIzaSyDJ6zzo0j3pmR66JvbHTkxPjSkgSSbtqSw",
 			authDomain: "webgames-2465e.firebaseapp.com",
@@ -48,8 +48,8 @@
 			measurementId: "G-0KG4CBX669"
 			};
 
-			firebase.initializeApp(firebaseConfig);
-			firebase.analytics();
+			const app = initializeApp(firebaseConfig);
+			const analytics = getAnalytics(app);
 		</script>
 
 
