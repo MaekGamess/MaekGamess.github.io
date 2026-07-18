@@ -34,10 +34,10 @@
 	<link rel="stylesheet" href="couruselStyle.css">
 
 		<!-- Firebase -->
-		<script type="module">
-			import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-			import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
+		<script src="https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js"></script>
 
+		<script>
 			const firebaseConfig = {
 			apiKey: "AIzaSyDJ6zzo0j3pmR66JvbHTkxPjSkgSSbtqSw",
 			authDomain: "webgames-2465e.firebaseapp.com",
@@ -115,7 +115,7 @@ prevBtn.onclick = () => {
 
         <div class="game-card">
             <a href="/TikTak/">
-                <img src="HeadIco.jpg" alt="TikTak football minigame">
+                <img src="/images/HeadIco.jpg" alt="TikTak football minigame">
             </a>
             <h3>TikTak</h3>
             <p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
