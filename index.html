@@ -1,199 +1,3687 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1718185467419521"
-     crossorigin="anonymous"></script>
-	
-<div style="width:300px;">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="+22+s8-1j-3l+cg"
-     data-ad-client="ca-pub-1718185467419521"
-     data-ad-slot="3636637452"></ins>
-</div>
-	
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-  
-  <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Play Free Football Style Minigames | Maek Games</title>
-    <meta name="description" content="Play fast and fun football-style minigames online. Try TikTak and other quick sports challenges directly in your browser. No downloads required.">
+<title>MaekGames — We Build Worlds</title>
 
-    <!-- Open Graph (for social sharing) -->
-    <meta property="og:title" content="Play Free Football Style Minigames">
-    <meta property="og:description" content="Fast football-style minigames like TikTak. Play instantly online.">
-    <meta property="og:image" content="https://www.maekgames.id.lv/HeadIco.jpg">
-    <meta property="og:url" content="https://www.maekgames.id.lv/">
-    <meta property="og:type" content="website">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="iconV2.png">
+:root{
+    --bg:#020204;
+    --red:#ff304f;
+    --orange:#ff7138;
+    --purple:#8b5cff;
+    --cyan:#20d9ff;
+    --white:#f5f5f7;
+    --muted:#777781;
+    --line:rgba(255,255,255,.09);
+}
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="couruselStyle.css">
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-		<!-- Firebase -->
-		<script type="module">
-			import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-			import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
+html{
+    scroll-behavior:smooth;
+}
 
-			const firebaseConfig = {
-			apiKey: "AIzaSyDJ6zzo0j3pmR66JvbHTkxPjSkgSSbtqSw",
-			authDomain: "webgames-2465e.firebaseapp.com",
-			projectId: "webgames-2465e",
-			storageBucket: "webgames-2465e.firebasestorage.app",
-			messagingSenderId: "232744715284",
-			appId: "1:232744715284:web:0d51c11f3f5ea6ef785301",
-			measurementId: "G-0KG4CBX669"
-			};
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    background:#020204;
+    color:var(--white);
+    font-family:Inter,Arial,sans-serif;
+}
 
-			const app = initializeApp(firebaseConfig);
-			const analytics = getAnalytics(app);
+a{
+    color:inherit;
+    text-decoration:none;
+}
 
-			// ⭐ Helper function to attach events safely
-			function trackClick(id, gameName) {
-				const el = document.getElementById(id);
-				if (!el) return;
+/* =====================================================
+   STAR FIELD
+===================================================== */
 
-				el.addEventListener("click", () => {
-				logEvent(analytics, "game_play_clicked", {
-					game: gameName,
-					page: "homepage"
-					});
-				});
-			}
+#star-field{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    overflow:hidden;
+    pointer-events:none;
+    background:#020204;
+}
 
-			// ⭐ Register events for all games
-			trackClick("playTikTak", "TikTak");
-			trackClick("playPlinko", "Plinko");
-			trackClick("playHitBurger", "HitBurger");
-			trackClick("playTableBall", "TableBall");
-		</script>
+.html-star{
+    position:absolute;
+    width:var(--size);
+    height:var(--size);
+    left:var(--x);
+    top:var(--y);
+    border-radius:50%;
+    background:var(--color);
+    opacity:var(--opacity);
+    box-shadow:0 0 calc(var(--size)*3) var(--color);
 
+    animation:
+        twinkle var(--twinkle) ease-in-out infinite alternate,
+        drift var(--drift) linear infinite;
 
+    animation-delay:var(--delay);
+}
 
+@keyframes twinkle{
+    0%{
+        opacity:calc(var(--opacity)*.25);
+        transform:scale(.65);
+    }
+    50%{
+        opacity:var(--opacity);
+        transform:scale(1);
+    }
+    100%{
+        opacity:calc(var(--opacity)*.45);
+        transform:scale(.8);
+    }
+}
 
-	</head>
-	<script>
-		const track = document.querySelector('.carousel-track');
-		const images = document.querySelectorAll('.carousel img');
-		const prevBtn = document.querySelector('.carousel-btn.prev');
-		const nextBtn = document.querySelector('.carousel-btn.next');
+@keyframes drift{
+    0%,100%{
+        margin-left:0;
+        margin-top:0;
+    }
+    25%{
+        margin-left:var(--move-x);
+        margin-top:var(--move-y);
+    }
+    50%{
+        margin-left:0;
+        margin-top:0;
+    }
+    75%{
+        margin-left:calc(var(--move-x)*-.7);
+        margin-top:calc(var(--move-y)*-.7);
+    }
+}
 
-		let index = 0;
+/* =====================================================
+   GRAIN
+===================================================== */
 
-		function updateCarousel() {
-		if (track) {
-		track.style.transform = `translateX(-${index * 420}px)`;
-		}
-		}
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    pointer-events:none;
+    opacity:.014;
 
-		if (nextBtn && images.length > 0) {
-		nextBtn.onclick = () => {
-		index = (index + 1) % images.length;
-		updateCarousel();
-		};
-		}
+    background-image:url(
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
+    );
+}
 
-		if (prevBtn && images.length > 0) {
-		prevBtn.onclick = () => {
-		index = (index - 1 + images.length) % images.length;
-		updateCarousel();
-		};
-		}
-	</script>
-</script>
+/* =====================================================
+   NAV
+===================================================== */
+
+nav{
+    position:fixed;
+    inset:0 0 auto 0;
+    height:82px;
+    padding:0 6vw;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    z-index:100;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(2,2,4,.95),
+            rgba(2,2,4,.55),
+            transparent
+        );
+
+    backdrop-filter:blur(8px);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:13px;
+
+    font-size:14px;
+    font-weight:900;
+    letter-spacing:.18em;
+}
+
+.logo-mark{
+    width:27px;
+    height:27px;
+
+    position:relative;
+
+    transform:rotate(45deg);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--red),
+            var(--orange)
+        );
+
+    box-shadow:0 0 35px rgba(255,48,79,.5);
+}
+
+.logo-mark::after{
+    content:"";
+    position:absolute;
+    inset:7px;
+    background:var(--bg);
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+
+    color:#85858e;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+}
+
+.nav-links a{
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-contact{
+    padding:11px 16px;
+    border:1px solid var(--line);
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+    position:relative;
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+
+    padding:130px 7vw 90px;
+
+    overflow:hidden;
+
+    z-index:1;
+}
+
+.hero-grid{
+    position:absolute;
+    inset:0;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+
+    background-size:80px 80px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent
+        );
+
+    pointer-events:none;
+}
+
+.hero-content{
+    position:relative;
+    z-index:20;
+    width:53%;
+}
+
+.eyebrow{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    margin-bottom:25px;
+
+    color:#92929b;
+
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+}
+
+.eyebrow::before{
+    content:"";
+    width:35px;
+    height:1px;
+
+    background:var(--red);
+
+    box-shadow:0 0 15px var(--red);
+}
+
+h1{
+    font-size:clamp(65px,8vw,135px);
+    line-height:.82;
+
+    letter-spacing:-.075em;
+    font-weight:900;
+    text-transform:uppercase;
+}
+
+h1 span{
+    display:block;
+
+    color:transparent;
+
+    background:
+        linear-gradient(
+            110deg,
+            white,
+            #9999a4,
+            var(--red),
+            var(--orange)
+        );
+
+    background-size:200% auto;
+
+    background-clip:text;
+    -webkit-background-clip:text;
+
+    animation:gradientMove 5s linear infinite;
+}
+
+@keyframes gradientMove{
+    to{
+        background-position:200% center;
+    }
+}
+
+.hero-copy{
+    max-width:510px;
+    margin-top:34px;
+
+    color:#81818b;
+
+    font-size:13px;
+    line-height:1.85;
+}
+
+.hero-actions{
+    display:flex;
+    gap:12px;
+    margin-top:30px;
+}
+
+.btn{
+    min-width:145px;
+
+    padding:15px 22px;
+
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+
+    border:1px solid var(--line);
+
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+
+    transition:.3s ease;
+}
+
+.btn-primary{
+    border:0;
+
+    background:
+        linear-gradient(
+            110deg,
+            var(--red),
+            var(--orange)
+        );
+
+    box-shadow:
+        0 18px 50px rgba(255,48,79,.2);
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 25px 65px rgba(255,48,79,.32);
+}
+
+.btn-secondary:hover{
+    background:rgba(255,255,255,.05);
+    border-color:rgba(255,255,255,.25);
+}
+
+/* =====================================================
+   THREE SCENE
+===================================================== */
+
+.scene{
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    z-index:5;
+
+    pointer-events:auto;
+}
+
+.scene canvas{
+    display:block;
+    width:100%!important;
+    height:100%!important;
+}
+
+/*
+   Keep text above the canvas.
+*/
+
+.hero-content,
+.stats,
+nav{
+    pointer-events:auto;
+}
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+    position:absolute;
+
+    left:7vw;
+    bottom:30px;
+
+    display:flex;
+    gap:40px;
+
+    z-index:25;
+}
+
+.stat strong{
+    display:block;
+    font-size:23px;
+}
+
+.stat span{
+    display:block;
+    margin-top:5px;
+
+    color:#5e5e67;
+
+    font-size:8px;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+}
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+section:not(.hero){
+    position:relative;
+    z-index:10;
+
+    padding:140px 7vw;
+}
+
+.section-label{
+    margin-bottom:15px;
+
+    color:var(--red);
+
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+}
+
+.section-title{
+    font-size:clamp(45px,6vw,85px);
+    line-height:.9;
+
+    letter-spacing:-.07em;
+    text-transform:uppercase;
+}
+
+.games{
+    background:
+        radial-gradient(
+            circle at 80% 40%,
+            rgba(100,40,130,.055),
+            transparent 35%
+        );
+}
+
+.section-header{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+
+    margin-bottom:55px;
+}
+
+.section-description{
+    max-width:350px;
+
+    color:#73737d;
+
+    font-size:12px;
+    line-height:1.8;
+}
+
+.games-grid{
+    display:grid;
+
+    grid-template-columns:1.35fr .8fr;
+    grid-template-rows:300px 300px;
+
+    gap:18px;
+}
+
+.game-card{
+    position:relative;
+    overflow:hidden;
+
+    border:1px solid var(--line);
+
+    background:rgba(8,8,13,.72);
+
+    transition:
+        transform .4s ease,
+        border-color .4s ease;
+}
+
+.game-card:first-child{
+    grid-row:span 2;
+}
+
+.game-card:hover{
+    border-color:rgba(255,255,255,.25);
+}
+
+.game-bg{
+    position:absolute;
+    inset:0;
+
+    transition:transform 1s ease;
+}
+
+.game-card:hover .game-bg{
+    transform:scale(1.08);
+}
+
+.game-one{
+    background:
+        radial-gradient(circle at 70% 40%,#b91e3d,transparent 30%),
+        linear-gradient(140deg,#18151b,#08080b);
+}
+
+.game-two{
+    background:
+        radial-gradient(circle at 75% 20%,#7139ff,transparent 35%),
+        #09080f;
+}
+
+.game-three{
+    background:
+        radial-gradient(circle at 70% 70%,#0bcbd9,transparent 35%),
+        #071113;
+}
+
+.game-art{
+    position:absolute;
+
+    width:230px;
+    height:330px;
+
+    right:10%;
+    bottom:-70px;
+
+    transform:rotate(12deg);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff5366,
+            #3d0d18 65%,
+            #050506
+        );
+
+    box-shadow:
+        0 0 90px rgba(255,48,79,.2);
+}
+
+.game-card:nth-child(2) .game-art{
+    background:
+        linear-gradient(
+            135deg,
+            #ad84ff,
+            #24144e 65%,
+            #050506
+        );
+}
+
+.game-card:nth-child(3) .game-art{
+    background:
+        linear-gradient(
+            135deg,
+            #40e7ef,
+            #073d45 65%,
+            #050506
+        );
+}
+
+.game-info{
+    position:absolute;
+
+    left:28px;
+    bottom:25px;
+
+    z-index:5;
+}
+
+.game-number{
+    margin-bottom:10px;
+
+    color:#777780;
+
+    font-size:8px;
+    letter-spacing:.15em;
+}
+
+.game-info h3{
+    font-size:30px;
+    letter-spacing:-.05em;
+    text-transform:uppercase;
+}
+
+.game-info p{
+    margin-top:5px;
+
+    color:#85858e;
+
+    font-size:8px;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+}
+
+/* =====================================================
+   MANIFESTO
+===================================================== */
+
+.manifesto{
+    min-height:70vh;
+
+    display:flex;
+    align-items:center;
+
+    position:relative;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,48,79,.045),
+            transparent 40%
+        );
+}
+
+.manifesto::before{
+    content:"MAEK";
+
+    position:absolute;
+
+    left:-3vw;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:rgba(255,255,255,.012);
+
+    font-size:25vw;
+    font-weight:900;
+    letter-spacing:-.1em;
+}
+
+.manifesto-content{
+    position:relative;
+    z-index:2;
+
+    max-width:1000px;
+}
+
+.manifesto h2{
+    font-size:clamp(45px,7vw,100px);
+    line-height:.95;
+    letter-spacing:-.07em;
+}
+
+.manifesto h2 span{
+    color:var(--red);
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    position:relative;
+    z-index:10;
+
+    padding:80px 7vw 35px;
+
+    border-top:1px solid var(--line);
+
+    background:rgba(2,2,4,.9);
+}
+
+.footer-main{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+
+    padding-bottom:80px;
+}
+
+.footer-title{
+    max-width:650px;
+
+    font-size:clamp(45px,6vw,80px);
+    line-height:.9;
+    letter-spacing:-.07em;
+}
+
+.footer-title span{
+    color:var(--red);
+}
+
+.footer-links{
+    display:flex;
+    gap:20px;
+
+    color:#676770;
+
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+}
+
+.footer-links a:hover{
+    color:white;
+}
+
+.footer-bottom{
+    display:flex;
+    justify-content:space-between;
+
+    padding-top:25px;
+
+    border-top:1px solid var(--line);
+
+    color:#4c4c55;
+
+    font-size:8px;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+}
+
+/* =====================================================
+   REVEALS
+===================================================== */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+
+    transition:
+        opacity .9s ease,
+        transform .9s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:900px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        min-height:900px;
+        padding:150px 25px 100px;
+    }
+
+    .hero-content{
+        width:100%;
+    }
+
+    .scene{
+        opacity:.65;
+    }
+
+    .stats{
+        left:25px;
+    }
+
+    .section-header{
+        display:block;
+    }
+
+    .section-description{
+        margin-top:25px;
+    }
+
+    .games-grid{
+        grid-template-columns:1fr;
+        grid-template-rows:400px 300px 300px;
+    }
+
+    .game-card:first-child{
+        grid-row:auto;
+    }
+
+    .footer-main{
+        display:block;
+    }
+
+    .footer-links{
+        margin-top:40px;
+    }
+}
+
+@media(max-width:600px){
+
+    h1{
+        font-size:63px;
+    }
+
+    .scene{
+        opacity:.45;
+    }
+
+    .stats{
+        left:20px;
+        gap:20px;
+    }
+
+    section:not(.hero),
+    footer{
+        padding-left:20px;
+        padding-right:20px;
+    }
+
+    .hero-actions{
+        flex-direction:column;
+        width:200px;
+    }
+
+    .footer-bottom{
+        display:block;
+        line-height:2;
+    }
+}
+</style>
+</head>
 
 <body>
-      <div class="buttons">
-        <a href="https://play.google.com/store/apps/details?id=com.MaeKGames.StrikeBowling" class="btn">Google Play</a>
-        <a href="https://www.youtube.com/watch?v=clIlkQuuxHY&t=1s" class="btn secondary">Watch Trailer</a>
-      </div>
-     <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Play Free Football Style Minigames Online</h1>
-            <p>Fast, fun football-inspired browser games you can play instantly. No downloads, no accounts — just quick sports challenges like TikTak and more coming soon.</p>
 
-            <a href="/TikTak/" class="cta-btn">Play TikTak</a>
+<div id="star-field"></div>
+
+<nav>
+    <a href="#" class="logo">
+        <span class="logo-mark"></span>
+        MAEKGAMES
+    </a>
+
+    <div class="nav-links">
+        <a href="#games">Games</a>
+        <a href="#studio">Studio</a>
+        <a href="#contact">Contact</a>
+
+        <a
+            href="https://play.google.com/store/apps/dev?id=6536597579987620889"
+            target="_blank"
+            rel="noopener"
+            class="nav-contact"
+        >
+            Play Games ↗
+        </a>
+    </div>
+</nav>
+
+<section class="hero">
+
+    <div class="hero-grid"></div>
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            Independent Game Studio
+        </div>
+
+        <h1>
+            We Build
+            <span>Worlds.</span>
+        </h1>
+
+        <p class="hero-copy">
+            MaekGames creates ambitious interactive worlds,
+            unforgettable characters and experiences designed
+            to stay with players long after the screen goes dark.
+        </p>
+
+        <div class="hero-actions">
+
+            <a href="#games" class="btn btn-primary">
+                Explore Games ↗
+            </a>
+
+            <a
+                href="https://play.google.com/store/apps/dev?id=6536597579987620889"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-secondary"
+            >
+                Play Our Games
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- FULL SCREEN THREE.JS CANVAS -->
+    <div id="three-scene" class="scene"></div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>05</strong>
+            <span>Years Creating</span>
+        </div>
+
+        <div class="stat">
+            <strong>03</strong>
+            <span>Worlds In Development</span>
         </div>
 
         
-    <!-- IMAGE CAROUSEL -->
-    <div class="carousel">
-        <div class="carousel-track">
-            <img src="/Images/tiktak.jpg" alt="Football minigame screenshot">
-            <img src="/Images/tableball.jpg" alt="Gameplay preview">
-            <img src="/Images/PlinkoBoard.jpg" alt="Sports challenge preview">
-		    <img src="/Images/HitBurger.jpg" alt="Sports challenge preview">	
-        </div>
 
-        <button class="carousel-btn prev">❮</button>
-        <button class="carousel-btn next">❯</button>
     </div>
-      
-    </section>
 
-    <!-- GAMES GRID -->
-    <section class="games">
-        <h2>Featured Football Minigames</h2>
+</section>
 
-        <div class="game-card">
-            <a href="/TikTak/">
-                <img src="/images/tiktak.jpg" alt="TikTak football minigame">
-            </a>
-            <h3>TikTak</h3>
-            <p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
-			<a href="/TikTak/" class="play-btn" id="playTikTak">Play Now</a>
+<section class="games" id="games">
+
+    <div class="section-header reveal">
+
+        <div>
+            <div class="section-label">
+                Selected Projects
+            </div>
+
+            <h2 class="section-title">
+                Our<br>Worlds
+            </h2>
         </div>
-		
-		<div class="game-card">
-			<a href="/TableBall/">
-				<img src="/images/tableball.jpg" alt="TableBall football minigame">
+
+        <p class="section-description">
+            Stories built from the ground up.
+            Every project begins with a simple question:
+            what world would we want to disappear into?
+        </p>
+
+    </div>
+
+    <div class="games-grid">
+
+        <article class="game-card reveal">
+            <div class="game-bg game-one"></div>
+            <div class="game-art"></div>
+
+            <div class="game-info">
+                <div class="game-number">01 / 03</div>
+                <h3>Afterfall</h3>
+                <p>Action RPG · In Development</p>
+            </div>
+        </article>
+
+        <article class="game-card reveal">
+            <div class="game-bg game-two"></div>
+            <div class="game-art"></div>
+
+            <div class="game-info">
+                <div class="game-number">02 / 03</div>
+                <h3>Voidborn</h3>
+                <p>Science Fiction · 2027</p>
+            </div>
+        </article>
+
+        <article class="game-card reveal">
+            <div class="game-bg game-three"></div>
+            <div class="game-art"></div>
+
+            <div class="game-info">
+                <div class="game-number">03 / 03</div>
+                <h3>Drift</h3>
+                <p>Experimental · Concept</p>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<section class="manifesto" id="studio">
+
+    <div class="manifesto-content reveal">
+
+        <div class="section-label">
+            Our Philosophy
+        </div>
+
+        <h2>
+            Games should feel
+            <span>impossible.</span>
+        </h2>
+
+        <p class="hero-copy">
+            We combine technology, art and obsessive attention
+            to detail to create experiences that feel bigger
+            than the medium itself.
+        </p>
+
+    </div>
+
+</section>
+
+<footer id="contact">
+
+    <div class="footer-main">
+
+        <h2 class="footer-title reveal">
+            Ready to build
+            <span>something?</span>
+        </h2>
+
+        <div class="footer-links">
+
+            <a href="#">Instagram</a>
+            <a href="#">X</a>
+            <a href="#">Discord</a>
+            <a href="#">LinkedIn</a>
+
+            <a
+                href="https://play.google.com/store/apps/dev?id=6536597579987620889"
+                target="_blank"
+                rel="noopener"
+            >
+                Google Play
             </a>
-			<h3>TableBall</h3>
-			<p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
-			<a href="/TableBall/" class="play-btn" id="playTableBall">Play Now</a>
-		</div>
 
-		<div class="game-card">
-			<a href="/PlinkoBoard/">
-				<img src="/images/PlinkoBoard.jpg" alt="PlinkoBoard football minigame">
-            </a>
-			<h3>PlinkoBoard</h3>
-			<p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
-			<a href="/PlinkoBoard/" class="play-btn" id="playPlinko">Play Now</a>
-		</div>
+        </div>
 
-		<div class="game-card">
-			<a href="/HitBurger/">
-				<img src="/images/HitBurger.jpg" alt="HitBurger football minigame">
-            </a>
-			<h3>HitBurger</h3>
-			<p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
-			<a href="/HitBurger/" class="play-btn" id="playHitBurger">Play Now</a>
-		</div>
+    </div>
+
+    <div class="footer-bottom">
+
+        <span>© 2026 MAEKGAMES</span>
+
+        <span>BUILT FOR THE NEXT GENERATION</span>
+
+    </div>
+
+</footer>
+
+<script>
+/* =====================================================
+   HTML STAR FIELD
+===================================================== */
+
+const starField =
+    document.getElementById("star-field");
+
+const STAR_COUNT =
+    window.innerWidth < 700 ? 100 : 220;
+
+const starColors = [
+    "rgba(255,255,255,.92)",
+    "rgba(255,255,255,.72)",
+    "rgba(255,90,120,.75)",
+    "rgba(160,130,255,.72)",
+    "rgba(100,220,255,.68)"
+];
+
+for(let i=0;i<STAR_COUNT;i++){
+
+    const star =
+        document.createElement("span");
+
+    star.className = "html-star";
+
+    const size =
+        Math.random() < .9
+            ? Math.random()*1.25+.35
+            : Math.random()*2.2+1;
+
+    star.style.setProperty(
+        "--size",
+        `${size}px`
+    );
+
+    star.style.setProperty(
+        "--x",
+        `${Math.random()*100}%`
+    );
+
+    star.style.setProperty(
+        "--y",
+        `${Math.random()*100}%`
+    );
+
+    star.style.setProperty(
+        "--opacity",
+        Math.random()*.45+.25
+    );
+
+    star.style.setProperty(
+        "--twinkle",
+        `${Math.random()*5+2}s`
+    );
+
+    star.style.setProperty(
+        "--drift",
+        `${Math.random()*35+25}s`
+    );
+
+    star.style.setProperty(
+        "--move-x",
+        `${(Math.random()-.5)*40}px`
+    );
+
+    star.style.setProperty(
+        "--move-y",
+        `${(Math.random()-.5)*40}px`
+    );
+
+    star.style.setProperty(
+        "--delay",
+        `${Math.random()*-15}s`
+    );
+
+    star.style.setProperty(
+        "--color",
+        starColors[
+            Math.floor(
+                Math.random()*starColors.length
+            )
+        ]
+    );
+
+    starField.appendChild(star);
+}
+</script>
+
+<script type="importmap">
+{
+    "imports":{
+        "three":
+            "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+
+        "three/addons/":
+            "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+    }
+}
+</script>
+
+<script type="module">
+
+import * as THREE from "three";
+
+import {
+    EffectComposer
+} from "three/addons/postprocessing/EffectComposer.js";
+
+import {
+    RenderPass
+} from "three/addons/postprocessing/RenderPass.js";
+
+import {
+    UnrealBloomPass
+} from "three/addons/postprocessing/UnrealBloomPass.js";
 
 
-        <!-- Add more game cards here when new games launch -->
-    </section>
+/* =====================================================
+   CONTAINER
+===================================================== */
 
-    <!-- ABOUT SECTION -->
-    <section class="about">
-        <h2>About Maek Games</h2>
-        <p>Maek Games creates lightweight browser minigames inspired by football and other sports. The goal is simple: quick, fun gameplay you can enjoy anytime without downloads or complicated menus.</p>
-    </section>
-  </section>
+const container =
+    document.getElementById("three-scene");
 
-  <footer>
-    © 2026 Maek Games / Studio — Built with ❤️
-    <a href="policy.html">Privacy Policy</a>
-  </footer>
+if(!container){
+    throw new Error(
+        "MaekGames: #three-scene was not found."
+    );
+}
+
+
+/* =====================================================
+   SCENE
+===================================================== */
+
+const scene =
+    new THREE.Scene();
+
+
+/* =====================================================
+   CAMERA
+===================================================== */
+
+const camera =
+    new THREE.PerspectiveCamera(
+        42,
+        window.innerWidth /
+        window.innerHeight,
+        .1,
+        100
+    );
+
+camera.position.set(
+    0,
+    .4,
+    8.5
+);
+
+
+/* =====================================================
+   RENDERER
+===================================================== */
+
+const renderer =
+    new THREE.WebGLRenderer({
+        antialias:true,
+        alpha:true,
+        powerPreference:"high-performance"
+    });
+
+renderer.setPixelRatio(
+    Math.min(
+        window.devicePixelRatio,
+        2
+    )
+);
+
+renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+);
+
+renderer.outputColorSpace =
+    THREE.SRGBColorSpace;
+
+renderer.toneMapping =
+    THREE.ACESFilmicToneMapping;
+
+renderer.toneMappingExposure =
+    1.05;
+
+renderer.setClearColor(
+    0x000000,
+    0
+);
+
+container.appendChild(
+    renderer.domElement
+);
+
+
+/* =====================================================
+   COMPOSER
+===================================================== */
+
+const composer =
+    new EffectComposer(renderer);
+
+composer.addPass(
+    new RenderPass(
+        scene,
+        camera
+    )
+);
+
+const bloom =
+    new UnrealBloomPass(
+        new THREE.Vector2(
+            window.innerWidth,
+            window.innerHeight
+        ),
+        .65,
+        .45,
+        .18
+    );
+
+composer.addPass(bloom);
+
+
+/* =====================================================
+   LIGHTS
+===================================================== */
+
+scene.add(
+    new THREE.AmbientLight(
+        0x283044,
+        .75
+    )
+);
+
+const keyLight =
+    new THREE.DirectionalLight(
+        0xff5266,
+        3.0
+    );
+
+keyLight.position.set(
+    4,
+    4,
+    5
+);
+
+scene.add(keyLight);
+
+const fillLight =
+    new THREE.DirectionalLight(
+        0x315cff,
+        2.0
+    );
+
+fillLight.position.set(
+    -4,
+    2,
+    -5
+);
+
+scene.add(fillLight);
+
+
+/* =====================================================
+   PLANET GROUP
+===================================================== */
+
+const planet =
+    new THREE.Group();
+
+scene.add(planet);
+
+
+/* =====================================================
+   PLANET SHADER
+===================================================== */
+
+const planetVertex = `
+
+varying vec3 vNormal;
+varying vec3 vWorldPosition;
+varying vec2 vUv;
+
+void main(){
+
+    vUv = uv;
+
+    vNormal =
+        normalize(
+            normalMatrix *
+            normal
+        );
+
+    vec4 world =
+        modelMatrix *
+        vec4(position,1.0);
+
+    vWorldPosition =
+        world.xyz;
+
+    gl_Position =
+        projectionMatrix *
+        viewMatrix *
+        world;
+}
+`;
+
+
+const planetFragment = `
+
+varying vec3 vNormal;
+varying vec3 vWorldPosition;
+varying vec2 vUv;
+
+uniform float uTime;
+uniform float uPulse;
+
+
+/* cheap procedural noise */
+
+float hash(vec3 p){
+
+    p =
+        fract(
+            p *
+            .3183099
+            + vec3(.1,.2,.3)
+        );
+
+    p *= 17.0;
+
+    return fract(
+        p.x *
+        p.y *
+        p.z *
+        (p.x+p.y+p.z)
+    );
+}
+
+
+float noise(vec3 p){
+
+    vec3 i =
+        floor(p);
+
+    vec3 f =
+        fract(p);
+
+    f =
+        f*f*(3.0-2.0*f);
+
+    float n000 =
+        hash(i+vec3(0,0,0));
+
+    float n100 =
+        hash(i+vec3(1,0,0));
+
+    float n010 =
+        hash(i+vec3(0,1,0));
+
+    float n110 =
+        hash(i+vec3(1,1,0));
+
+    float n001 =
+        hash(i+vec3(0,0,1));
+
+    float n101 =
+        hash(i+vec3(1,0,1));
+
+    float n011 =
+        hash(i+vec3(0,1,1));
+
+    float n111 =
+        hash(i+vec3(1,1,1));
+
+    return mix(
+        mix(
+            mix(n000,n100,f.x),
+            mix(n010,n110,f.x),
+            f.y
+        ),
+        mix(
+            mix(n001,n101,f.x),
+            mix(n011,n111,f.x),
+            f.y
+        ),
+        f.z
+    );
+}
+
+
+void main(){
+
+    vec3 normal =
+        normalize(vNormal);
+
+    float light =
+        dot(
+            normal,
+            normalize(
+                vec3(
+                    .4,
+                    .65,
+                    1.0
+                )
+            )
+        );
+
+    light =
+        smoothstep(
+            -.45,
+            .8,
+            light
+        );
+
+
+    vec3 p =
+        normalize(vWorldPosition);
+
+
+    float n =
+        noise(
+            p * 3.0
+            + vec3(
+                0.0,
+                uTime*.018,
+                0.0
+            )
+        );
+
+
+    float n2 =
+        noise(
+            p * 7.0
+            - uTime*.01
+        );
+
+
+    float terrain =
+        smoothstep(
+            .43,
+            .63,
+            n*.7+n2*.3
+        );
+
+
+    vec3 ocean =
+        vec3(
+            .008,
+            .018,
+            .055
+        );
+
+
+    vec3 land =
+        vec3(
+            .12,
+            .025,
+            .028
+        );
+
+
+    vec3 hotLand =
+        vec3(
+            .45,
+            .035,
+            .055
+        );
+
+
+    vec3 surface =
+        mix(
+            ocean,
+            land,
+            terrain
+        );
+
+
+    surface =
+        mix(
+            surface,
+            hotLand,
+            smoothstep(
+                .72,
+                .95,
+                n
+            )*.35
+        );
+
+
+    /* subtle city lights on night side */
+
+    float night =
+        1.0 -
+        smoothstep(
+            .05,
+            .28,
+            light
+        );
+
+
+    float cities =
+        smoothstep(
+            .73,
+            .82,
+            n2
+        ) *
+        night;
+
+
+    surface +=
+        vec3(
+            1.0,
+            .10,
+            .035
+        ) *
+        cities *
+        .8;
+
+
+    surface *=
+        .35 +
+        light*.9;
+
+
+    float pulse =
+        uPulse *
+        (.5+.5*sin(uTime*8.0));
+
+
+    surface +=
+        vec3(
+            1.0,
+            .03,
+            .02
+        ) *
+        pulse *
+        .22;
+
+
+    gl_FragColor =
+        vec4(
+            surface,
+            1.0
+        );
+}
+`;
+
+
+const planetMaterial =
+    new THREE.ShaderMaterial({
+
+        vertexShader:
+            planetVertex,
+
+        fragmentShader:
+            planetFragment,
+
+        uniforms:{
+            uTime:{
+                value:0
+            },
+
+            uPulse:{
+                value:0
+            }
+        }
+    });
+
+
+const planetMesh =
+    new THREE.Mesh(
+
+        new THREE.SphereGeometry(
+            2.0,
+            128,
+            128
+        ),
+
+        planetMaterial
+    );
+
+planet.add(planetMesh);
+
+
+/* =====================================================
+   CLOUDS
+===================================================== */
+
+const cloudMaterial =
+    new THREE.MeshPhongMaterial({
+
+        color:
+            0x8e9cff,
+
+        transparent:
+            true,
+
+        opacity:
+            .055,
+
+        depthWrite:
+            false,
+
+        blending:
+            THREE.AdditiveBlending
+    });
+
+const clouds =
+    new THREE.Mesh(
+
+        new THREE.SphereGeometry(
+            2.055,
+            96,
+            96
+        ),
+
+        cloudMaterial
+    );
+
+planet.add(clouds);
+
+
+/* =====================================================
+   ATMOSPHERE
+===================================================== */
+
+const atmosphereMaterial =
+    new THREE.ShaderMaterial({
+
+        transparent:true,
+
+        depthWrite:false,
+
+        side:THREE.BackSide,
+
+        blending:
+            THREE.AdditiveBlending,
+
+        uniforms:{
+            color:{
+                value:
+                    new THREE.Color(
+                        0xff365f
+                    )
+            },
+
+            intensity:{
+                value:.9
+            }
+        },
+
+        vertexShader:`
+
+            varying vec3 vNormal;
+
+            void main(){
+
+                vNormal =
+                    normalize(
+                        normalMatrix *
+                        normal
+                    );
+
+                gl_Position =
+                    projectionMatrix *
+                    modelViewMatrix *
+                    vec4(
+                        position,
+                        1.0
+                    );
+            }
+
+        `,
+
+        fragmentShader:`
+
+            uniform vec3 color;
+            uniform float intensity;
+
+            varying vec3 vNormal;
+
+            void main(){
+
+                float rim =
+                    pow(
+                        1.0 -
+                        max(
+                            dot(
+                                normalize(vNormal),
+                                vec3(
+                                    0,
+                                    0,
+                                    1
+                                )
+                            ),
+                            0.0
+                        ),
+                        3.0
+                    );
+
+                gl_FragColor =
+                    vec4(
+                        color,
+                        rim *
+                        intensity
+                    );
+            }
+        `
+    });
+
+
+const atmosphere =
+    new THREE.Mesh(
+
+        new THREE.SphereGeometry(
+            2.16,
+            96,
+            96
+        ),
+
+        atmosphereMaterial
+    );
+
+planet.add(atmosphere);
+
+
+/* =====================================================
+   ORBIT RINGS
+===================================================== */
+
+function createRing(
+    radius,
+    color,
+    rotation
+){
+
+    const ring =
+        new THREE.Mesh(
+
+            new THREE.TorusGeometry(
+                radius,
+                .006,
+                8,
+                220
+            ),
+
+            new THREE.MeshBasicMaterial({
+
+                color,
+
+                transparent:true,
+
+                opacity:.22,
+
+                blending:
+                    THREE.AdditiveBlending
+            })
+        );
+
+    ring.rotation.set(
+        rotation.x,
+        rotation.y,
+        rotation.z
+    );
+
+    scene.add(ring);
+
+    return ring;
+}
+
+const ring1 =
+    createRing(
+        2.72,
+        0xff304f,
+        {
+            x:Math.PI/2.4,
+            y:0,
+            z:-.3
+        }
+    );
+
+const ring2 =
+    createRing(
+        3.0,
+        0x714cff,
+        {
+            x:.7,
+            y:Math.PI/3,
+            z:.3
+        }
+    );
+
+const ring3 =
+    createRing(
+        3.25,
+        0x20d9ff,
+        {
+            x:1.2,
+            y:.2,
+            z:1
+        }
+    );
+
+
+/* =====================================================
+   CORE
+===================================================== */
+
+const core =
+    new THREE.Mesh(
+
+        new THREE.SphereGeometry(
+            .36,
+            48,
+            48
+        ),
+
+        new THREE.MeshBasicMaterial({
+            color:0xff2548
+        })
+    );
+
+planet.add(core);
+
+const coreLight =
+    new THREE.PointLight(
+        0xff304f,
+        9,
+        5
+    );
+
+planet.add(coreLight);
+
+
+/* =====================================================
+   SPACE PARTICLES
+===================================================== */
+
+const starCount = 1100;
+
+const starPositions =
+    new Float32Array(
+        starCount*3
+    );
+
+for(let i=0;i<starCount;i++){
+
+    const radius =
+        4.5 +
+        Math.random()*11;
+
+    const theta =
+        Math.random()*Math.PI*2;
+
+    const phi =
+        Math.acos(
+            THREE.MathUtils.randFloatSpread(2)
+        );
+
+    starPositions[i*3] =
+        radius*
+        Math.sin(phi)*
+        Math.cos(theta);
+
+    starPositions[i*3+1] =
+        radius*
+        Math.cos(phi);
+
+    starPositions[i*3+2] =
+        radius*
+        Math.sin(phi)*
+        Math.sin(theta);
+}
+
+const starGeometry =
+    new THREE.BufferGeometry();
+
+starGeometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(
+        starPositions,
+        3
+    )
+);
+
+const starMaterial =
+    new THREE.PointsMaterial({
+
+        color:0xffffff,
+
+        size:.018,
+
+        transparent:true,
+
+        opacity:.55,
+
+        depthWrite:false,
+
+        blending:
+            THREE.AdditiveBlending
+    });
+
+const spaceStars =
+    new THREE.Points(
+        starGeometry,
+        starMaterial
+    );
+
+scene.add(spaceStars);
+
+
+/* =====================================================
+   SNAKES
+===================================================== */
+
+const snakes = [];
+
+const snakeColors = [
+    0xff304f,
+    0xff7138,
+    0x8b5cff,
+    0x20d9ff
+];
+
+const RADIAL_SEGMENTS = 8;
+const BODY_SEGMENTS = 70;
+
+
+function createSnake(options={}){
+
+    const group =
+        new THREE.Group();
+
+    planet.add(group);
+
+
+    const color =
+        options.color ??
+        snakeColors[
+            Math.floor(
+                Math.random()*
+                snakeColors.length
+            )
+        ];
+
+
+    const points = [];
+
+    for(
+        let i=0;
+        i<BODY_SEGMENTS;
+        i++
+    ){
+        points.push(
+            new THREE.Vector3()
+        );
+    }
+
+
+    const geometry =
+        new THREE.BufferGeometry();
+
+    const positions =
+        new Float32Array(
+            (BODY_SEGMENTS+1)*
+            RADIAL_SEGMENTS*
+            3
+        );
+
+    geometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(
+            positions,
+            3
+        )
+    );
+
+
+    const material =
+        new THREE.MeshStandardMaterial({
+
+            color,
+
+            roughness:.22,
+
+            metalness:.72,
+
+            emissive:color,
+
+            emissiveIntensity:.38
+        });
+
+
+    const body =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
+
+    group.add(body);
+
+
+    /* glow shell */
+
+    const glowGeometry =
+        geometry.clone();
+
+    const glowMaterial =
+        new THREE.MeshBasicMaterial({
+
+            color,
+
+            transparent:true,
+
+            opacity:.10,
+
+            depthWrite:false,
+
+            blending:
+                THREE.AdditiveBlending
+        });
+
+    const glow =
+        new THREE.Mesh(
+            glowGeometry,
+            glowMaterial
+        );
+
+    group.add(glow);
+
+
+    /* head */
+
+    const head =
+        new THREE.Mesh(
+
+            new THREE.SphereGeometry(
+                .115,
+                24,
+                24
+            ),
+
+            new THREE.MeshStandardMaterial({
+
+                color,
+
+                emissive:color,
+
+                emissiveIntensity:1.2,
+
+                roughness:.18,
+
+                metalness:.65
+            })
+        );
+
+    group.add(head);
+
+
+    /* eyes */
+
+    const eyeMaterial =
+        new THREE.MeshBasicMaterial({
+            color:0xffffff
+        });
+
+    const eye1 =
+        new THREE.Mesh(
+            new THREE.SphereGeometry(
+                .018,
+                8,
+                8
+            ),
+            eyeMaterial
+        );
+
+    const eye2 =
+        eye1.clone();
+
+    eye1.position.set(
+        -.035,
+        .025,
+        -.095
+    );
+
+    eye2.position.set(
+        .035,
+        .025,
+        -.095
+    );
+
+    head.add(
+        eye1,
+        eye2
+    );
+
+
+    const headLight =
+        new THREE.PointLight(
+            color,
+            1.8,
+            .9
+        );
+
+    head.add(headLight);
+
+
+    /* trail */
+
+    const trailPositions =
+        new Float32Array(
+            35*3
+        );
+
+    const trailGeometry =
+        new THREE.BufferGeometry();
+
+    trailGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(
+            trailPositions,
+            3
+        )
+    );
+
+    const trailMaterial =
+        new THREE.LineBasicMaterial({
+
+            color,
+
+            transparent:true,
+
+            opacity:.13,
+
+            blending:
+                THREE.AdditiveBlending,
+
+            depthWrite:false
+        });
+
+    const trail =
+        new THREE.Line(
+            trailGeometry,
+            trailMaterial
+        );
+
+    scene.add(trail);
+
+
+    const data = {
+
+        group,
+        body,
+        glow,
+        head,
+        trail,
+        points,
+
+        color,
+
+        radius:
+            2.16,
+
+        latitude:
+            options.latitude ??
+            THREE.MathUtils.randFloat(
+                -.7,
+                .7
+            ),
+
+        longitude:
+            options.longitude ??
+            Math.random()*
+            Math.PI*2,
+
+        speed:
+            options.speed ??
+            THREE.MathUtils.randFloat(
+                .18,
+                .34
+            ),
+
+        direction:
+            options.direction ??
+            (
+                Math.random()>.5
+                ?1
+                :-1
+            ),
+
+        phase:
+            Math.random()*
+            Math.PI*2,
+
+        pulse:
+            0,
+
+        flash:
+            0,
+
+        trailPoints:
+            Array.from(
+                {length:35},
+                ()=>new THREE.Vector3()
+            )
+    };
+
+    group.userData=data;
+
+    snakes.push(group);
+}
+
+
+/* =====================================================
+   CREATE SNAKES
+===================================================== */
+
+createSnake({
+    color:0xff304f,
+    latitude:.15,
+    longitude:0,
+    speed:.30,
+    direction:1
+});
+
+createSnake({
+    color:0x8b5cff,
+    latitude:-.37,
+    longitude:2,
+    speed:.23,
+    direction:-1
+});
+
+createSnake({
+    color:0x20d9ff,
+    latitude:.50,
+    longitude:4,
+    speed:.26,
+    direction:1
+});
+
+createSnake({
+    color:0xff7138,
+    latitude:-.08,
+    longitude:5,
+    speed:.20,
+    direction:-1
+});
+
+
+/* =====================================================
+   SPHERICAL POSITION
+===================================================== */
+
+function snakePosition(
+    data,
+    distance
+){
+
+    const angle =
+        data.longitude +
+        distance*
+        data.direction;
+
+
+    const wave =
+        Math.sin(
+            distance*2.8+
+            data.phase
+        )*.06;
+
+
+    const latitude =
+        data.latitude+
+        wave;
+
+
+    const cosLat =
+        Math.cos(latitude);
+
+
+    return new THREE.Vector3(
+
+        data.radius*
+        cosLat*
+        Math.cos(angle),
+
+        data.radius*
+        Math.sin(latitude),
+
+        data.radius*
+        cosLat*
+        Math.sin(angle)
+    );
+}
+
+
+/* =====================================================
+   SNAKE UPDATE
+===================================================== */
+
+function updateSnake(
+    snake,
+    time,
+    delta
+){
+
+    const data =
+        snake.userData;
+
+
+    data.longitude +=
+        data.speed*
+        data.direction*
+        delta;
+
+
+    for(
+        let i=0;
+        i<BODY_SEGMENTS;
+        i++
+    ){
+
+        const distance =
+            i*.055;
+
+
+        const p =
+            snakePosition(
+                data,
+                -distance
+            );
+
+
+        const normal =
+            p.clone().normalize();
+
+
+        const wave =
+            Math.sin(
+                time*7-
+                i*.48+
+                data.phase
+            )*.025;
+
+
+        p.add(
+            normal.multiplyScalar(
+                wave
+            )
+        );
+
+
+        data.points[i].copy(p);
+    }
+
+
+    /*
+       Rebuild a tapered tube manually.
+
+       Important:
+       RADIAL_SEGMENTS is explicitly
+       defined above, avoiding the
+       previous "radialSegments is not defined"
+       error.
+    */
+
+    for(
+        let i=0;
+        i<BODY_SEGMENTS;
+        i++
+    ){
+
+        const p =
+            data.points[i];
+
+        const next =
+            data.points[
+                Math.min(
+                    i+1,
+                    BODY_SEGMENTS-1
+                )
+            ];
+
+        const tangent =
+            next.clone()
+            .sub(p)
+            .normalize();
+
+
+        const normal =
+            p.clone()
+            .normalize();
+
+
+        let side =
+            new THREE.Vector3()
+            .crossVectors(
+                tangent,
+                normal
+            )
+            .normalize();
+
+
+        if(side.lengthSq()<.001){
+
+            side =
+                new THREE.Vector3(
+                    1,0,0
+                );
+
+        }
+
+
+        const binormal =
+            new THREE.Vector3()
+            .crossVectors(
+                side,
+                tangent
+            )
+            .normalize();
+
+
+        /*
+           Strong taper toward tail.
+        */
+
+        const t =
+            i/
+            (BODY_SEGMENTS-1);
+
+
+        const radius =
+            .095*
+            Math.pow(
+                1-t,
+                .72
+            )+
+            .012;
+
+
+        for(
+            let j=0;
+            j<RADIAL_SEGMENTS;
+            j++
+        ){
+
+            const a =
+                j/
+                RADIAL_SEGMENTS*
+                Math.PI*2;
+
+
+            const vertex =
+                p.clone()
+                .add(
+                    side.clone()
+                    .multiplyScalar(
+                        Math.cos(a)*
+                        radius
+                    )
+                )
+                .add(
+                    binormal.clone()
+                    .multiplyScalar(
+                        Math.sin(a)*
+                        radius
+                    )
+                );
+
+
+            const index =
+                (
+                    i*
+                    RADIAL_SEGMENTS+
+                    j
+                )*3;
+
+
+            data.body.geometry
+                .attributes
+                .position
+                .array[index]
+                =
+                vertex.x;
+
+            data.body.geometry
+                .attributes
+                .position
+                .array[index+1]
+                =
+                vertex.y;
+
+            data.body.geometry
+                .attributes
+                .position
+                .array[index+2]
+                =
+                vertex.z;
+        }
+    }
+
+
+    /*
+       duplicate geometry for glow
+    */
+
+    const source =
+        data.body.geometry
+        .attributes
+        .position
+        .array;
+
+    const glowArray =
+        data.glow.geometry
+        .attributes
+        .position
+        .array;
+
+    for(
+        let i=0;
+        i<source.length;
+        i++
+    ){
+
+        glowArray[i]=source[i];
+    }
+
+
+    data.body.geometry
+        .attributes
+        .position
+        .needsUpdate=true;
+
+    data.glow.geometry
+        .attributes
+        .position
+        .needsUpdate=true;
+
+
+    /*
+       Head.
+    */
+
+    data.head.position.copy(
+        data.points[0]
+    );
+
+
+    const direction =
+        data.points[0]
+        .clone()
+        .sub(data.points[1])
+        .normalize();
+
+
+    data.head.quaternion.setFromUnitVectors(
+        new THREE.Vector3(0,0,1),
+        direction
+    );
+
+
+    /*
+       Energy pulse.
+    */
+
+    if(data.pulse>0){
+
+        data.pulse +=
+            delta*1.5;
+
+        const pulse =
+            data.pulse;
+
+
+        data.body.material
+            .emissiveIntensity =
+            .4+
+            Math.max(
+                0,
+                Math.sin(
+                    pulse*Math.PI
+                )
+            )*3.0;
+
+
+        if(pulse>1){
+            data.pulse=0;
+        }
+
+    }else{
+
+        data.body.material
+            .emissiveIntensity=.38;
+    }
+
+
+    if(data.flash>0){
+
+        data.flash -=
+            delta*3;
+
+        data.head.material
+            .emissiveIntensity =
+            1+
+            data.flash*5;
+
+    }else{
+
+        data.head.material
+            .emissiveIntensity=1.2;
+    }
+
+
+    /*
+       Trail.
+    */
+
+    for(
+        let i=
+            data.trailPoints.length-1;
+        i>0;
+        i--
+    ){
+
+        data.trailPoints[i]
+            .lerp(
+                data.trailPoints[i-1],
+                .65
+            );
+    }
+
+    data.trailPoints[0]
+        .copy(data.head.position);
+
+
+    const trailArray =
+        data.trail.geometry
+        .attributes
+        .position
+        .array;
+
+
+    for(
+        let i=0;
+        i<data.trailPoints.length;
+        i++
+    ){
+
+        const p =
+            data.trailPoints[i];
+
+        trailArray[i*3]=p.x;
+        trailArray[i*3+1]=p.y;
+        trailArray[i*3+2]=p.z;
+    }
+
+
+    data.trail.geometry
+        .attributes
+        .position
+        .needsUpdate=true;
+}
+
+
+/* =====================================================
+   COLLECTIBLES
+===================================================== */
+
+const collectibles=[];
+
+
+function spawnCrystal(){
+
+    const group =
+        new THREE.Group();
+
+
+    const color =
+        Math.random()>.5
+        ?0xff526a
+        :0xffb84d;
+
+
+    const material =
+        new THREE.MeshStandardMaterial({
+
+            color,
+
+            emissive:color,
+
+            emissiveIntensity:.65,
+
+            metalness:.75,
+
+            roughness:.16
+        });
+
+
+    const crystal =
+        new THREE.Mesh(
+
+            new THREE.OctahedronGeometry(
+                .105,
+                1
+            ),
+
+            material
+        );
+
+
+    group.add(crystal);
+
+
+    const glow =
+        new THREE.Mesh(
+
+            new THREE.OctahedronGeometry(
+                .15,
+                1
+            ),
+
+            new THREE.MeshBasicMaterial({
+
+                color,
+
+                transparent:true,
+
+                opacity:.055,
+
+                blending:
+                    THREE.AdditiveBlending,
+
+                depthWrite:false
+            })
+        );
+
+
+    group.add(glow);
+
+
+    const phi =
+        THREE.MathUtils.randFloat(
+            .25,
+            Math.PI-.25
+        );
+
+
+    const theta =
+        Math.random()*
+        Math.PI*2;
+
+
+    const radius=2.22;
+
+
+    group.position.set(
+
+        radius*
+        Math.sin(phi)*
+        Math.cos(theta),
+
+        radius*
+        Math.cos(phi),
+
+        radius*
+        Math.sin(phi)*
+        Math.sin(theta)
+    );
+
+
+    group.userData={
+
+        crystal,
+        material,
+
+        life:
+            Math.random()*10,
+
+        collected:false
+    };
+
+
+    planet.add(group);
+
+    collectibles.push(group);
+}
+
+
+for(let i=0;i<7;i++){
+    spawnCrystal();
+}
+
+
+/* =====================================================
+   COLLECTION BURST
+===================================================== */
+
+function burst(
+    position,
+    color
+){
+
+    const count=42;
+
+    const positions =
+        new Float32Array(
+            count*3
+        );
+
+    const velocities=[];
+
+    for(let i=0;i<count;i++){
+
+        positions[i*3]=position.x;
+        positions[i*3+1]=position.y;
+        positions[i*3+2]=position.z;
+
+        velocities.push(
+            new THREE.Vector3(
+                (Math.random()-.5)*.055,
+                (Math.random()-.5)*.055,
+                (Math.random()-.5)*.055
+            )
+        );
+    }
+
+
+    const geometry =
+        new THREE.BufferGeometry();
+
+    geometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(
+            positions,
+            3
+        )
+    );
+
+
+    const material =
+        new THREE.PointsMaterial({
+
+            color,
+
+            size:.035,
+
+            transparent:true,
+
+            opacity:1,
+
+            blending:
+                THREE.AdditiveBlending,
+
+            depthWrite:false
+        });
+
+
+    const particles =
+        new THREE.Points(
+            geometry,
+            material
+        );
+
+
+    planet.add(particles);
+
+
+    let life=0;
+
+
+    function animateBurst(){
+
+        life+=.018;
+
+
+        const attr =
+            geometry.attributes
+            .position;
+
+
+        for(let i=0;i<count;i++){
+
+            const v=
+                velocities[i];
+
+            attr.setXYZ(
+
+                i,
+
+                attr.getX(i)+v.x,
+                attr.getY(i)+v.y,
+                attr.getZ(i)+v.z
+            );
+        }
+
+
+        attr.needsUpdate=true;
+
+        material.opacity=
+            1-life;
+
+
+        if(life<1){
+
+            requestAnimationFrame(
+                animateBurst
+            );
+
+        }else{
+
+            planet.remove(particles);
+
+            geometry.dispose();
+            material.dispose();
+        }
+    }
+
+
+    animateBurst();
+}
+
+
+/* =====================================================
+   SHOCKWAVE
+===================================================== */
+
+function shockwave(
+    position,
+    color
+){
+
+    const geometry =
+        new THREE.RingGeometry(
+            .02,
+            .035,
+            48
+        );
+
+
+    const material =
+        new THREE.MeshBasicMaterial({
+
+            color,
+
+            transparent:true,
+
+            opacity:.7,
+
+            side:
+                THREE.DoubleSide,
+
+            blending:
+                THREE.AdditiveBlending,
+
+            depthWrite:false
+        });
+
+
+    const ring =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
+
+
+    ring.position.copy(
+        position
+    );
+
+
+    const normal =
+        position
+        .clone()
+        .normalize();
+
+
+    ring.quaternion.setFromUnitVectors(
+        new THREE.Vector3(0,0,1),
+        normal
+    );
+
+
+    planet.add(ring);
+
+
+    let life=0;
+
+
+    function animateShock(){
+
+        life+=.035;
+
+
+        ring.scale.setScalar(
+            1+
+            life*5
+        );
+
+
+        material.opacity=
+            .7*(1-life);
+
+
+        if(life<1){
+
+            requestAnimationFrame(
+                animateShock
+            );
+
+        }else{
+
+            planet.remove(ring);
+
+            geometry.dispose();
+            material.dispose();
+        }
+    }
+
+
+    animateShock();
+}
+
+
+/* =====================================================
+   COLLECT
+===================================================== */
+
+function collectCrystal(
+    crystal,
+    snake
+){
+
+    const data=
+        crystal.userData;
+
+
+    if(data.collected)return;
+
+
+    data.collected=true;
+
+
+    const snakeData=
+        snake.userData;
+
+
+    snakeData.pulse=.001;
+    snakeData.flash=1;
+
+
+    planetMaterial.uniforms
+        .uPulse.value=1;
+
+
+    burst(
+        crystal.position,
+        data.material.color
+    );
+
+
+    shockwave(
+        crystal.position,
+        data.material.color
+    );
+
+
+    let progress=0;
+
+
+    function disappear(){
+
+        progress+=.07;
+
+
+        crystal.scale.setScalar(
+            1+
+            progress*4
+        );
+
+
+        data.material
+            .emissiveIntensity=
+            .65+
+            progress*5;
+
+
+        data.material.opacity=
+            1-progress;
+
+
+        data.material.transparent=true;
+
+
+        if(progress<1){
+
+            requestAnimationFrame(
+                disappear
+            );
+
+        }else{
+
+            const index=
+                collectibles.indexOf(
+                    crystal
+                );
+
+
+            if(index!==-1){
+
+                collectibles.splice(
+                    index,
+                    1
+                );
+            }
+
+
+            planet.remove(
+                crystal
+            );
+
+
+            setTimeout(
+                spawnCrystal,
+                THREE.MathUtils.randInt(
+                    900,
+                    2800
+                )
+            );
+        }
+    }
+
+
+    disappear();
+}
+
+
+/* =====================================================
+   CRYSTAL UPDATE
+===================================================== */
+
+function updateCrystals(delta){
+
+    collectibles.forEach(
+        crystal=>{
+
+            const data=
+                crystal.userData;
+
+
+            data.life+=delta;
+
+
+            crystal.rotation.y+=
+                delta*1.5;
+
+
+            crystal.rotation.x+=
+                delta*.55;
+
+
+            const pulse=
+                1+
+                Math.sin(
+                    data.life*3
+                )*.09;
+
+
+            crystal.scale.setScalar(
+                pulse
+            );
+
+
+            snakes.forEach(
+                snake=>{
+
+                    if(data.collected)
+                        return;
+
+
+                    const distance=
+                        snake.userData
+                        .head
+                        .position
+                        .distanceTo(
+                            crystal.position
+                        );
+
+
+                    if(distance<.27){
+
+                        collectCrystal(
+                            crystal,
+                            snake
+                        );
+                    }
+                }
+            );
+        }
+    );
+}
+
+
+/* =====================================================
+   MOUSE ROTATION
+===================================================== */
+
+let pointerDown=false;
+
+let targetRotationX=0;
+let targetRotationY=0;
+
+let currentRotationX=0;
+let currentRotationY=0;
+
+let lastX=0;
+let lastY=0;
+
+
+window.addEventListener(
+    "pointerdown",
+    event=>{
+
+        pointerDown=true;
+
+        lastX=event.clientX;
+        lastY=event.clientY;
+    }
+);
+
+
+window.addEventListener(
+    "pointerup",
+    ()=>{
+
+        pointerDown=false;
+    }
+);
+
+
+window.addEventListener(
+    "pointermove",
+    event=>{
+
+        if(pointerDown){
+
+            const dx=
+                event.clientX-lastX;
+
+            const dy=
+                event.clientY-lastY;
+
+
+            targetRotationY +=
+                dx*.004;
+
+
+            targetRotationX +=
+                dy*.0025;
+
+
+            targetRotationX=
+                THREE.MathUtils.clamp(
+                    targetRotationX,
+                    -.65,
+                    .65
+                );
+
+
+            lastX=event.clientX;
+            lastY=event.clientY;
+        }
+    }
+);
+
+
+/* =====================================================
+   CLOCK
+===================================================== */
+
+const clock=
+    new THREE.Clock();
+
+let time=0;
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+function animate(){
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+    const delta=
+        Math.min(
+            clock.getDelta(),
+            .033
+        );
+
+
+    time+=delta;
+
+
+    /* shader time */
+
+    planetMaterial.uniforms
+        .uTime.value=time;
+
+
+    planetMaterial.uniforms
+        .uPulse.value=
+        Math.max(
+            0,
+            planetMaterial.uniforms
+                .uPulse.value-
+            delta*1.8
+        );
+
+
+    /* planet idle rotation */
+
+    targetRotationY +=
+        delta*.025;
+
+
+    currentRotationY +=
+        (
+            targetRotationY-
+            currentRotationY
+        )*.045;
+
+
+    currentRotationX +=
+        (
+            targetRotationX-
+            currentRotationX
+        )*.045;
+
+
+    planet.rotation.y=
+        currentRotationY;
+
+    planet.rotation.x=
+        currentRotationX;
+
+
+    /* cloud movement */
+
+    clouds.rotation.y=
+        time*.018;
+
+    clouds.rotation.x=
+        Math.sin(time*.12)*.02;
+
+
+    /* snakes */
+
+    snakes.forEach(
+        snake=>{
+
+            updateSnake(
+                snake,
+                time,
+                delta
+            );
+        }
+    );
+
+
+    /* crystals */
+
+    updateCrystals(delta);
+
+
+    /* planet breathing */
+
+    const breathe=
+        1+
+        Math.sin(time*1.2)*.008;
+
+    planet.scale.setScalar(
+        breathe
+    );
+
+
+    /* core */
+
+    const coreScale=
+        1+
+        Math.sin(time*3)*.08;
+
+    core.scale.setScalar(
+        coreScale
+    );
+
+    coreLight.intensity=
+        8+
+        Math.sin(time*3)*2;
+
+
+    /* rings */
+
+    ring1.rotation.z+=
+        delta*.07;
+
+    ring2.rotation.x+=
+        delta*.045;
+
+    ring3.rotation.y-=
+        delta*.055;
+
+
+    /* stars */
+
+    spaceStars.rotation.y+=
+        delta*.008;
+
+    spaceStars.rotation.x+=
+        delta*.0015;
+
+
+    /* cinematic camera */
+
+    const targetCameraX=
+        Math.sin(time*.17)*.12;
+
+    const targetCameraY=
+        .4+
+        Math.sin(time*.21)*.08;
+
+
+    camera.position.x +=
+        (
+            targetCameraX-
+            camera.position.x
+        )*.01;
+
+
+    camera.position.y +=
+        (
+            targetCameraY-
+            camera.position.y
+        )*.01;
+
+
+    camera.lookAt(
+        0,
+        0,
+        0
+    );
+
+
+    composer.render();
+}
+
+
+animate();
+
+
+/* =====================================================
+   RESIZE
+===================================================== */
+
+function resize(){
+
+    const width=
+        window.innerWidth;
+
+    const height=
+        window.innerHeight;
+
+
+    camera.aspect=
+        width/height;
+
+    camera.updateProjectionMatrix();
+
+
+    renderer.setSize(
+        width,
+        height
+    );
+
+    composer.setSize(
+        width,
+        height
+    );
+}
+
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+
+/* =====================================================
+   SCROLL REVEALS
+===================================================== */
+
+const observer=
+    new IntersectionObserver(
+        entries=>{
+
+            entries.forEach(
+                entry=>{
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        entry.target
+                            .classList
+                            .add(
+                                "visible"
+                            );
+
+                        observer.unobserve(
+                            entry.target
+                        );
+                    }
+                }
+            );
+        },
+        {
+            threshold:.15
+        }
+    );
+
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(
+        element=>{
+            observer.observe(element);
+        }
+    );
+
+
+/* =====================================================
+   GAME CARD TILT
+===================================================== */
+
+document
+    .querySelectorAll(".game-card")
+    .forEach(
+        card=>{
+
+            card.addEventListener(
+                "pointermove",
+                event=>{
+
+                    const rect=
+                        card.getBoundingClientRect();
+
+
+                    const x=
+                        event.clientX-
+                        rect.left;
+
+                    const y=
+                        event.clientY-
+                        rect.top;
+
+
+                    const rotateX=
+                        (
+                            y/
+                            rect.height-
+                            .5
+                        )*-5;
+
+
+                    const rotateY=
+                        (
+                            x/
+                            rect.width-
+                            .5
+                        )*5;
+
+
+                    card.style.transform=
+                    `
+                        perspective(900px)
+                        rotateX(${rotateX}deg)
+                        rotateY(${rotateY}deg)
+                        translateY(-6px)
+                    `;
+                }
+            );
+
+
+            card.addEventListener(
+                "pointerleave",
+                ()=>{
+                    card.style.transform="";
+                }
+            );
+        }
+    );
+
+</script>
 
 </body>
 </html>
