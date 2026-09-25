@@ -1,199 +1,1285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1718185467419521"
-     crossorigin="anonymous"></script>
-	
-<div style="width:300px;">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="+22+s8-1j-3l+cg"
-     data-ad-client="ca-pub-1718185467419521"
-     data-ad-slot="3636637452"></ins>
-</div>
-	
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-  
-  <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050507" />
+  <title>NEXUS — Game Studio</title>
 
-    <title>Play Free Football Style Minigames | Maek Games</title>
-    <meta name="description" content="Play fast and fun football-style minigames online. Try TikTak and other quick sports challenges directly in your browser. No downloads required.">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-    <!-- Open Graph (for social sharing) -->
-    <meta property="og:title" content="Play Free Football Style Minigames">
-    <meta property="og:description" content="Fast football-style minigames like TikTak. Play instantly online.">
-    <meta property="og:image" content="https://www.maekgames.id.lv/HeadIco.jpg">
-    <meta property="og:url" content="https://www.maekgames.id.lv/">
-    <meta property="og:type" content="website">
+    :root {
+      --bg: #050507;
+      --panel: #0b0b10;
+      --text: #f4f4f6;
+      --muted: #858592;
+      --line: rgba(255,255,255,.09);
+      --red: #ff304f;
+      --orange: #ff7a18;
+      --purple: #8b5cf6;
+      --cyan: #38d9ff;
+    }
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="iconV2.png">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="couruselStyle.css">
+    html {
+      scroll-behavior: smooth;
+    }
 
-		<!-- Firebase -->
-		<script type="module">
-			import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-			import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, sans-serif;
+      overflow-x: hidden;
+    }
 
-			const firebaseConfig = {
-			apiKey: "AIzaSyDJ6zzo0j3pmR66JvbHTkxPjSkgSSbtqSw",
-			authDomain: "webgames-2465e.firebaseapp.com",
-			projectId: "webgames-2465e",
-			storageBucket: "webgames-2465e.firebasestorage.app",
-			messagingSenderId: "232744715284",
-			appId: "1:232744715284:web:0d51c11f3f5ea6ef785301",
-			measurementId: "G-0KG4CBX669"
-			};
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-			const app = initializeApp(firebaseConfig);
-			const analytics = getAnalytics(app);
+    /* =========================
+       NOISE
+    ========================= */
 
-			// ⭐ Helper function to attach events safely
-			function trackClick(id, gameName) {
-				const el = document.getElementById(id);
-				if (!el) return;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+    }
 
-				el.addEventListener("click", () => {
-				logEvent(analytics, "game_play_clicked", {
-					game: gameName,
-					page: "homepage"
-					});
-				});
-			}
+    /* =========================
+       NAV
+    ========================= */
 
-			// ⭐ Register events for all games
-			trackClick("playTikTak", "TikTak");
-			trackClick("playPlinko", "Plinko");
-			trackClick("playHitBurger", "HitBurger");
-			trackClick("playTableBall", "TableBall");
-		</script>
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      background: linear-gradient(
+        to bottom,
+        rgba(5,5,7,.92),
+        rgba(5,5,7,.2),
+        transparent
+      );
+      backdrop-filter: blur(5px);
+    }
 
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: .16em;
+    }
 
+    .logo-mark {
+      width: 31px;
+      height: 31px;
+      position: relative;
+      transform: rotate(45deg);
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      box-shadow:
+        0 0 20px rgba(255,48,79,.45),
+        inset 0 0 10px rgba(255,255,255,.25);
+    }
 
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      background: #050507;
+    }
 
-	</head>
-	<script>
-		const track = document.querySelector('.carousel-track');
-		const images = document.querySelectorAll('.carousel img');
-		const prevBtn = document.querySelector('.carousel-btn.prev');
-		const nextBtn = document.querySelector('.carousel-btn.next');
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 35px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #aaaab4;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
 
-		let index = 0;
+    .nav-links a {
+      transition: .3s ease;
+    }
 
-		function updateCarousel() {
-		if (track) {
-		track.style.transform = `translateX(-${index * 420}px)`;
-		}
-		}
+    .nav-links a:hover {
+      color: white;
+    }
 
-		if (nextBtn && images.length > 0) {
-		nextBtn.onclick = () => {
-		index = (index + 1) % images.length;
-		updateCarousel();
-		};
-		}
+    .nav-cta {
+      border: 1px solid var(--line);
+      padding: 12px 18px;
+      border-radius: 3px;
+      background: rgba(255,255,255,.04);
+      transition: .3s ease;
+    }
 
-		if (prevBtn && images.length > 0) {
-		prevBtn.onclick = () => {
-		index = (index - 1 + images.length) % images.length;
-		updateCarousel();
-		};
-		}
-	</script>
-</script>
+    .nav-cta:hover {
+      border-color: rgba(255,48,79,.5);
+      background: rgba(255,48,79,.08);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 120px 7vw 70px;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+      opacity: .5;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      right: -180px;
+      top: 0;
+      border-radius: 50%;
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,48,79,.18),
+          rgba(126,40,180,.08) 38%,
+          transparent 68%
+        );
+      filter: blur(20px);
+    }
+
+    .hero-content {
+      width: 54%;
+      position: relative;
+      z-index: 5;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #a7a7b0;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .25em;
+      margin-bottom: 25px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 35px;
+      height: 1px;
+      background: var(--red);
+      box-shadow: 0 0 10px var(--red);
+    }
+
+    .hero h1 {
+      font-size: clamp(60px, 8.5vw, 145px);
+      line-height: .82;
+      letter-spacing: -.075em;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .hero h1 span {
+      display: block;
+      background: linear-gradient(
+        110deg,
+        #fff 20%,
+        #bcbcc6 45%,
+        #ff304f 72%,
+        #ff8c38
+      );
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: gradientMove 5s linear infinite;
+    }
+
+    @keyframes gradientMove {
+      to {
+        background-position: 200% center;
+      }
+    }
+
+    .hero-copy {
+      max-width: 510px;
+      margin-top: 34px;
+      color: #92929d;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 35px;
+    }
+
+    .btn {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-width: 145px;
+      padding: 15px 22px;
+      border: 1px solid var(--line);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      transition: .3s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      color: white;
+      border-color: transparent;
+      background: linear-gradient(110deg, #ff304f, #ff6330);
+      box-shadow: 0 10px 40px rgba(255,48,79,.2);
+    }
+
+    .btn-primary::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-110%);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.3),
+        transparent
+      );
+      transition: .5s ease;
+    }
+
+    .btn-primary:hover::before {
+      transform: translateX(110%);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.2);
+    }
+
+    /* =========================
+       3D ORB
+    ========================= */
+
+    .scene {
+      position: absolute;
+      width: min(650px, 60vw);
+      height: min(650px, 60vw);
+      right: 1vw;
+      top: 50%;
+      transform: translateY(-50%);
+      perspective: 1000px;
+    }
+
+    .orb {
+      position: absolute;
+      width: 390px;
+      height: 390px;
+      left: 50%;
+      top: 50%;
+      transform:
+        translate(-50%, -50%)
+        rotateX(15deg)
+        rotateY(-20deg);
+      transform-style: preserve-3d;
+      border-radius: 50%;
+      background:
+        radial-gradient(
+          circle at 30% 25%,
+          #ff9b82,
+          #ff304f 18%,
+          #6e1429 40%,
+          #13070c 65%,
+          #030304 100%
+        );
+      box-shadow:
+        0 0 50px rgba(255,48,79,.35),
+        0 0 120px rgba(255,48,79,.15),
+        inset -40px -30px 90px rgba(0,0,0,.8),
+        inset 20px 10px 40px rgba(255,255,255,.18);
+      animation: orbFloat 7s ease-in-out infinite;
+    }
+
+    @keyframes orbFloat {
+      0%,100% {
+        transform:
+          translate(-50%, -50%)
+          rotateX(15deg)
+          rotateY(-20deg)
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          translate(-50%, -50%)
+          rotateX(25deg)
+          rotateY(25deg)
+          translateY(-25px);
+      }
+    }
+
+    .orb::before,
+    .orb::after {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50%;
+      transform: rotateY(65deg);
+    }
+
+    .orb::after {
+      transform: rotateX(65deg);
+    }
+
+    .orb-core {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%) translateZ(80px);
+      background: white;
+      filter: blur(2px);
+      box-shadow:
+        0 0 20px #fff,
+        0 0 60px #ff304f,
+        0 0 120px #ff304f;
+    }
+
+    .ring {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.16);
+      transform-style: preserve-3d;
+    }
+
+    .ring.one {
+      width: 540px;
+      height: 180px;
+      transform: translate(-50%,-50%) rotateX(70deg) rotateZ(-15deg);
+      animation: ringSpin 12s linear infinite;
+    }
+
+    .ring.two {
+      width: 500px;
+      height: 170px;
+      transform: translate(-50%,-50%) rotateY(70deg) rotateZ(25deg);
+      border-color: rgba(255,48,79,.35);
+      animation: ringSpinReverse 16s linear infinite;
+    }
+
+    .ring.three {
+      width: 650px;
+      height: 230px;
+      transform: translate(-50%,-50%) rotateX(78deg);
+      border-color: rgba(139,92,246,.25);
+      animation: ringSpin 20s linear infinite;
+    }
+
+    @keyframes ringSpin {
+      from { rotate: 0deg; }
+      to { rotate: 360deg; }
+    }
+
+    @keyframes ringSpinReverse {
+      from { rotate: 0deg; }
+      to { rotate: -360deg; }
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 0 12px currentColor;
+      animation: particleFloat linear infinite;
+    }
+
+    @keyframes particleFloat {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      20% { opacity: 1; }
+      80% { opacity: .8; }
+      to {
+        transform: translateY(-180px);
+        opacity: 0;
+      }
+    }
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats {
+      position: absolute;
+      bottom: 35px;
+      left: 7vw;
+      display: flex;
+      gap: 45px;
+      z-index: 5;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 5px;
+      color: #666670;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    section {
+      position: relative;
+      padding: 140px 7vw;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 55px;
+    }
+
+    .section-label {
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-size: clamp(40px, 6vw, 80px);
+      line-height: .9;
+      letter-spacing: -.06em;
+      text-transform: uppercase;
+    }
+
+    .section-description {
+      max-width: 350px;
+      color: #777782;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       GAMES
+    ========================= */
+
+    .games {
+      background:
+        radial-gradient(circle at 80% 40%, rgba(126,50,150,.1), transparent 30%);
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: 1.35fr .8fr;
+      grid-template-rows: 300px 300px;
+      gap: 18px;
+    }
+
+    .game-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #0b0b0f;
+      cursor: pointer;
+      transition: transform .6s cubic-bezier(.2,.8,.2,1),
+                  border-color .4s;
+    }
+
+    .game-card:first-child {
+      grid-row: span 2;
+    }
+
+    .game-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(255,255,255,.22);
+    }
+
+    .game-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 1s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .game-card:hover .game-bg {
+      transform: scale(1.08);
+    }
+
+    .game-one {
+      background:
+        linear-gradient(120deg, rgba(0,0,0,.9), transparent),
+        radial-gradient(circle at 70% 40%, #c51d3d, transparent 25%),
+        linear-gradient(145deg,#16151b,#08080b);
+    }
+
+    .game-two {
+      background:
+        radial-gradient(circle at 80% 20%, #7d3cff, transparent 30%),
+        linear-gradient(145deg,#11101b,#08080b);
+    }
+
+    .game-three {
+      background:
+        radial-gradient(circle at 75% 70%, #0ac5d9, transparent 28%),
+        linear-gradient(145deg,#091518,#07090b);
+    }
+
+    .game-art {
+      position: absolute;
+      width: 230px;
+      height: 300px;
+      right: 10%;
+      bottom: -60px;
+      transform: rotate(12deg);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.25),
+          transparent 25%
+        ),
+        linear-gradient(135deg,#ff304f,#40101c 60%,#08080a);
+      box-shadow: 0 0 80px rgba(255,48,79,.2);
+      opacity: .8;
+    }
+
+    .game-card:nth-child(2) .game-art {
+      background:
+        linear-gradient(135deg,#a879ff,#24144e 60%,#07070b);
+      box-shadow: 0 0 80px rgba(139,92,246,.2);
+    }
+
+    .game-card:nth-child(3) .game-art {
+      background:
+        linear-gradient(135deg,#35e5f0,#073f48 60%,#07070b);
+      box-shadow: 0 0 80px rgba(56,217,255,.2);
+    }
+
+    .game-info {
+      position: absolute;
+      left: 28px;
+      bottom: 25px;
+      z-index: 2;
+    }
+
+    .game-number {
+      color: rgba(255,255,255,.45);
+      font-size: 10px;
+      letter-spacing: .15em;
+      margin-bottom: 10px;
+    }
+
+    .game-info h3 {
+      font-size: 31px;
+      text-transform: uppercase;
+      letter-spacing: -.04em;
+    }
+
+    .game-info p {
+      margin-top: 6px;
+      color: rgba(255,255,255,.5);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+    }
+
+    /* =========================
+       MANIFESTO
+    ========================= */
+
+    .manifesto {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,48,79,.08), transparent 40%);
+    }
+
+    .manifesto::before {
+      content: "NEXUS";
+      position: absolute;
+      left: -4vw;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24vw;
+      font-weight: 900;
+      letter-spacing: -.1em;
+      color: rgba(255,255,255,.015);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .manifesto-content {
+      max-width: 1000px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .manifesto h2 {
+      font-size: clamp(42px, 7vw, 100px);
+      line-height: .95;
+      letter-spacing: -.07em;
+    }
+
+    .manifesto h2 span {
+      color: var(--red);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 80px 7vw 35px;
+      border-top: 1px solid var(--line);
+      background: #030304;
+    }
+
+    .footer-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      padding-bottom: 80px;
+    }
+
+    .footer-title {
+      max-width: 650px;
+      font-size: clamp(40px, 6vw, 80px);
+      line-height: .9;
+      letter-spacing: -.07em;
+    }
+
+    .footer-title span {
+      color: var(--red);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 25px;
+      color: #73737e;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 25px;
+      border-top: 1px solid var(--line);
+      color: #4f4f59;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    /* =========================
+       REVEAL
+    ========================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .9s ease, transform .9s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================
+       CURSOR
+    ========================= */
+
+    .cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999;
+      transform: translate(-50%,-50%);
+      transition: width .2s, height .2s, background .2s;
+      mix-blend-mode: difference;
+    }
+
+    .cursor.active {
+      width: 42px;
+      height: 42px;
+      background: rgba(255,255,255,.1);
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 150px;
+        min-height: 900px;
+      }
+
+      .hero-content {
+        width: 100%;
+      }
+
+      .scene {
+        opacity: .42;
+        width: 700px;
+        height: 700px;
+        right: -250px;
+        top: 55%;
+      }
+
+      .hero-content {
+        z-index: 10;
+      }
+
+      .stats {
+        bottom: 30px;
+      }
+
+      .games-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 400px 300px 300px;
+      }
+
+      .game-card:first-child {
+        grid-row: auto;
+      }
+
+      .section-header,
+      .footer-main {
+        display: block;
+      }
+
+      .section-description {
+        margin-top: 25px;
+      }
+
+      .footer-links {
+        margin-top: 40px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        padding: 0 20px;
+      }
+
+      .hero {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .hero h1 {
+        font-size: 62px;
+      }
+
+      .scene {
+        right: -300px;
+        opacity: .3;
+      }
+
+      .stats {
+        left: 20px;
+        gap: 25px;
+      }
+
+      section,
+      footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 200px;
+      }
+
+      .footer-bottom {
+        display: block;
+        line-height: 2;
+      }
+    }
+  </style>
+</head>
 
 <body>
-      <div class="buttons">
-        <a href="https://play.google.com/store/apps/details?id=com.MaeKGames.StrikeBowling" class="btn">Google Play</a>
-        <a href="https://www.youtube.com/watch?v=clIlkQuuxHY&t=1s" class="btn secondary">Watch Trailer</a>
-      </div>
-     <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Play Free Football Style Minigames Online</h1>
-            <p>Fast, fun football-inspired browser games you can play instantly. No downloads, no accounts — just quick sports challenges like TikTak and more coming soon.</p>
 
-            <a href="/TikTak/" class="cta-btn">Play TikTak</a>
-        </div>
+  <!-- CURSOR -->
+  <div class="cursor"></div>
 
-        
-    <!-- IMAGE CAROUSEL -->
-    <div class="carousel">
-        <div class="carousel-track">
-            <img src="/Images/tiktak.jpg" alt="Football minigame screenshot">
-            <img src="/Images/tableball.jpg" alt="Gameplay preview">
-            <img src="/Images/PlinkoBoard.jpg" alt="Sports challenge preview">
-		    <img src="/Images/HitBurger.jpg" alt="Sports challenge preview">	
-        </div>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">
+      <span class="logo-mark"></span>
+      NEXUS
+    </a>
 
-        <button class="carousel-btn prev">❮</button>
-        <button class="carousel-btn next">❯</button>
+    <div class="nav-links">
+      <a href="#games">Games</a>
+      <a href="#studio">Studio</a>
+      <a href="#careers">Careers</a>
+      <a href="#contact" class="nav-cta">Contact</a>
     </div>
-      
-    </section>
+  </nav>
 
-    <!-- GAMES GRID -->
-    <section class="games">
-        <h2>Featured Football Minigames</h2>
 
-        <div class="game-card">
-            <a href="/TikTak/">
-                <img src="/images/tiktak.jpg" alt="TikTak football minigame">
-            </a>
-            <h3>TikTak</h3>
-            <p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
-			<a href="/TikTak/" class="play-btn" id="playTikTak">Play Now</a>
+  <!-- HERO -->
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-grid"></div>
+      <div class="hero-glow"></div>
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          Independent Game Studio
         </div>
-		
-		<div class="game-card">
-			<a href="/TableBall/">
-				<img src="/images/tableball.jpg" alt="TableBall football minigame">
-            </a>
-			<h3>TableBall</h3>
-			<p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
-			<a href="/TableBall/" class="play-btn" id="playTableBall">Play Now</a>
-		</div>
 
-		<div class="game-card">
-			<a href="/PlinkoBoard/">
-				<img src="/images/PlinkoBoard.jpg" alt="PlinkoBoard football minigame">
-            </a>
-			<h3>PlinkoBoard</h3>
-			<p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
-			<a href="/PlinkoBoard/" class="play-btn" id="playPlinko">Play Now</a>
-		</div>
+        <h1>
+          We Build
+          <span>Worlds.</span>
+        </h1>
 
-		<div class="game-card">
-			<a href="/HitBurger/">
-				<img src="/images/HitBurger.jpg" alt="HitBurger football minigame">
-            </a>
-			<h3>HitBurger</h3>
-			<p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
-			<a href="/HitBurger/" class="play-btn" id="playHitBurger">Play Now</a>
-		</div>
+        <p class="hero-copy">
+          NEXUS is an independent game studio creating
+          ambitious worlds, unforgettable characters and
+          experiences designed to stay with you long after
+          the screen goes dark.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#games" class="btn btn-primary">
+            Explore Games
+            <span>↗</span>
+          </a>
+
+          <a href="#studio" class="btn btn-secondary">
+            Our Studio
+          </a>
+        </div>
+
+      </div>
 
 
-        <!-- Add more game cards here when new games launch -->
+      <!-- 3D SCENE -->
+      <div class="scene" id="scene">
+
+        <div class="orb">
+          <div class="orb-core"></div>
+        </div>
+
+        <div class="ring one"></div>
+        <div class="ring two"></div>
+        <div class="ring three"></div>
+
+      </div>
+
+
+      <!-- STATS -->
+      <div class="stats">
+
+        <div class="stat">
+          <strong>08</strong>
+          <span>Years Creating</span>
+        </div>
+
+        <div class="stat">
+          <strong>03</strong>
+          <span>Worlds In Development</span>
+        </div>
+
+        <div class="stat">
+          <strong>70+</strong>
+          <span>People Worldwide</span>
+        </div>
+
+      </div>
+
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section class="about">
-        <h2>About Maek Games</h2>
-        <p>Maek Games creates lightweight browser minigames inspired by football and other sports. The goal is simple: quick, fun gameplay you can enjoy anytime without downloads or complicated menus.</p>
-    </section>
-  </section>
 
-  <footer>
-    © 2026 Maek Games / Studio — Built with ❤️
-    <a href="policy.html">Privacy Policy</a>
-  </footer>
+    <!-- GAMES -->
+    <section class="games" id="games">
+
+      <div class="section-header reveal">
+
+        <div>
+          <div class="section-label">Selected Projects</div>
+
+          <h2 class="section-title">
+            Our<br>
+            Worlds
+          </h2>
+        </div>
+
+        <p class="section-description">
+          Stories built from the ground up.
+          Every project begins with a simple question:
+          what world would we want to disappear into?
+        </p>
+
+      </div>
+
+
+      <div class="games-grid">
+
+        <article class="game-card reveal">
+
+          <div class="game-bg game-one"></div>
+          <div class="game-art"></div>
+
+          <div class="game-info">
+            <div class="game-number">01 / 03</div>
+            <h3>Afterfall</h3>
+            <p>Action RPG · In Development</p>
+          </div>
+
+        </article>
+
+
+        <article class="game-card reveal">
+
+          <div class="game-bg game-two"></div>
+          <div class="game-art"></div>
+
+          <div class="game-info">
+            <div class="game-number">02 / 03</div>
+            <h3>Voidborn</h3>
+            <p>Science Fiction · 2027</p>
+          </div>
+
+        </article>
+
+
+        <article class="game-card reveal">
+
+          <div class="game-bg game-three"></div>
+          <div class="game-art"></div>
+
+          <div class="game-info">
+            <div class="game-number">03 / 03</div>
+            <h3>Drift</h3>
+            <p>Experimental · Concept</p>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- STUDIO -->
+    <section class="manifesto" id="studio">
+
+      <div class="manifesto-content reveal">
+
+        <div class="section-label">
+          Our Philosophy
+        </div>
+
+        <h2>
+          Games should feel
+          <span>impossible.</span>
+        </h2>
+
+        <p class="hero-copy">
+          We combine technology, art and obsessive attention
+          to detail to create experiences that feel bigger
+          than the medium itself.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer id="contact">
+
+      <div class="footer-main">
+
+        <h2 class="footer-title reveal">
+          Ready to build
+          <span>something?</span>
+        </h2>
+
+        <div class="footer-links">
+          <a href="#">Instagram</a>
+          <a href="#">X</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Discord</a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 NEXUS GAMES</span>
+        <span>BUILT FOR THE NEXT GENERATION</span>
+      </div>
+
+    </footer>
+
+  </main>
+
+
+  <script>
+
+    /* =========================
+       PARTICLES
+    ========================= */
+
+    const scene = document.getElementById("scene");
+
+    for (let i = 0; i < 45; i++) {
+
+      const particle = document.createElement("div");
+
+      particle.className = "particle";
+
+      const angle = Math.random() * Math.PI * 2;
+      const radius = 150 + Math.random() * 230;
+
+      particle.style.left =
+        `calc(50% + ${Math.cos(angle) * radius}px)`;
+
+      particle.style.top =
+        `calc(50% + ${Math.sin(angle) * radius}px)`;
+
+      particle.style.animationDuration =
+        `${3 + Math.random() * 6}s`;
+
+      particle.style.animationDelay =
+        `${Math.random() * -6}s`;
+
+      particle.style.color =
+        Math.random() > .5 ? "#ff304f" : "#ffffff";
+
+      scene.appendChild(particle);
+    }
+
+
+    /* =========================
+       MOUSE PARALLAX
+    ========================= */
+
+    const orb = document.querySelector(".orb");
+
+    window.addEventListener("mousemove", (event) => {
+
+      const x =
+        (event.clientX / window.innerWidth - .5) * 2;
+
+      const y =
+        (event.clientY / window.innerHeight - .5) * 2;
+
+      orb.style.transform = `
+        translate(-50%, -50%)
+        rotateX(${15 - y * 12}deg)
+        rotateY(${-20 + x * 18}deg)
+      `;
+
+    });
+
+
+    /* =========================
+       CUSTOM CURSOR
+    ========================= */
+
+    const cursor =
+      document.querySelector(".cursor");
+
+    window.addEventListener("mousemove", (event) => {
+
+      cursor.style.left = event.clientX + "px";
+      cursor.style.top = event.clientY + "px";
+
+    });
+
+    document
+      .querySelectorAll("a, button, .game-card")
+      .forEach(element => {
+
+        element.addEventListener("mouseenter", () => {
+          cursor.classList.add("active");
+        });
+
+        element.addEventListener("mouseleave", () => {
+          cursor.classList.remove("active");
+        });
+
+      });
+
+
+    /* =========================
+       SCROLL REVEAL
+    ========================= */
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("visible");
+
+              observer.unobserve(entry.target);
+
+            }
+
+          });
+
+        },
+        {
+          threshold: .15
+        }
+      );
+
+    document
+      .querySelectorAll(".reveal")
+      .forEach(element => {
+        observer.observe(element);
+      });
+
+
+    /* =========================
+       CARD TILT
+    ========================= */
+
+    document
+      .querySelectorAll(".game-card")
+      .forEach(card => {
+
+        card.addEventListener("mousemove", event => {
+
+          const rect = card.getBoundingClientRect();
+
+          const x =
+            event.clientX - rect.left;
+
+          const y =
+            event.clientY - rect.top;
+
+          const rotateY =
+            ((x / rect.width) - .5) * 5;
+
+          const rotateX =
+            ((y / rect.height) - .5) * -5;
+
+          card.style.transform = `
+            perspective(900px)
+            rotateX(${rotateX}deg)
+            rotateY(${rotateY}deg)
+            translateY(-7px)
+          `;
+
+        });
+
+        card.addEventListener("mouseleave", () => {
+
+          card.style.transform = "";
+
+        });
+
+      });
+
+
+    /* =========================
+       HERO PARALLAX
+    ========================= */
+
+    window.addEventListener("scroll", () => {
+
+      const scroll =
+        window.scrollY;
+
+      const heroGlow =
+        document.querySelector(".hero-glow");
+
+      if (scroll < window.innerHeight) {
+
+        heroGlow.style.transform =
+          `translateY(${scroll * .15}px)`;
+
+      }
+
+    });
+
+  </script>
 
 </body>
 </html>
