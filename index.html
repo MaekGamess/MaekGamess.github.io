@@ -1,199 +1,235 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1718185467419521"
-     crossorigin="anonymous"></script>
-	
-<div style="width:300px;">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="+22+s8-1j-3l+cg"
-     data-ad-client="ca-pub-1718185467419521"
-     data-ad-slot="3636637452"></ins>
-</div>
-	
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#04060a">
+<meta property="og:title" content="Maek Games — Game Studio">
+<meta property="og:description" content="Nine worlds. One reel. Scroll to detonate.">
+<meta property="og:type" content="website">
+<title>Maek Games — Game Studio</title>
+<meta name="description" content="Maek Games is an independent game studio. Nine worlds, one reel — scroll to detonate.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 29 27H3Z' fill='%237ee8ff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+  }
+}
 </script>
-  
-  <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Play Free Football Style Minigames | Maek Games</title>
-    <meta name="description" content="Play fast and fun football-style minigames online. Try TikTak and other quick sports challenges directly in your browser. No downloads required.">
-
-    <!-- Open Graph (for social sharing) -->
-    <meta property="og:title" content="Play Free Football Style Minigames">
-    <meta property="og:description" content="Fast football-style minigames like TikTak. Play instantly online.">
-    <meta property="og:image" content="https://www.maekgames.id.lv/HeadIco.jpg">
-    <meta property="og:url" content="https://www.maekgames.id.lv/">
-    <meta property="og:type" content="website">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="iconV2.png">
-
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="couruselStyle.css">
-
-		<!-- Firebase -->
-		<script type="module">
-			import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-			import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
-
-			const firebaseConfig = {
-			apiKey: "AIzaSyDJ6zzo0j3pmR66JvbHTkxPjSkgSSbtqSw",
-			authDomain: "webgames-2465e.firebaseapp.com",
-			projectId: "webgames-2465e",
-			storageBucket: "webgames-2465e.firebasestorage.app",
-			messagingSenderId: "232744715284",
-			appId: "1:232744715284:web:0d51c11f3f5ea6ef785301",
-			measurementId: "G-0KG4CBX669"
-			};
-
-			const app = initializeApp(firebaseConfig);
-			const analytics = getAnalytics(app);
-
-			// ⭐ Helper function to attach events safely
-			function trackClick(id, gameName) {
-				const el = document.getElementById(id);
-				if (!el) return;
-
-				el.addEventListener("click", () => {
-				logEvent(analytics, "game_play_clicked", {
-					game: gameName,
-					page: "homepage"
-					});
-				});
-			}
-
-			// ⭐ Register events for all games
-			trackClick("playTikTak", "TikTak");
-			trackClick("playPlinko", "Plinko");
-			trackClick("playHitBurger", "HitBurger");
-			trackClick("playTableBall", "TableBall");
-		</script>
-
-
-
-
-	</head>
-	<script>
-		const track = document.querySelector('.carousel-track');
-		const images = document.querySelectorAll('.carousel img');
-		const prevBtn = document.querySelector('.carousel-btn.prev');
-		const nextBtn = document.querySelector('.carousel-btn.next');
-
-		let index = 0;
-
-		function updateCarousel() {
-		if (track) {
-		track.style.transform = `translateX(-${index * 420}px)`;
-		}
-		}
-
-		if (nextBtn && images.length > 0) {
-		nextBtn.onclick = () => {
-		index = (index + 1) % images.length;
-		updateCarousel();
-		};
-		}
-
-		if (prevBtn && images.length > 0) {
-		prevBtn.onclick = () => {
-		index = (index - 1 + images.length) % images.length;
-		updateCarousel();
-		};
-		}
-	</script>
-</script>
-
+</head>
 <body>
-      <div class="buttons">
-        <a href="https://play.google.com/store/apps/details?id=com.MaeKGames.StrikeBowling" class="btn">Google Play</a>
-        <a href="https://www.youtube.com/watch?v=clIlkQuuxHY&t=1s" class="btn secondary">Watch Trailer</a>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+
+<!-- ── fixed overlay layer ─────────────────────────────────────────────── -->
+<div class="overlay" aria-hidden="false">
+
+  <header class="hud hud-top">
+    <a class="logo" href="#top" aria-label="Maek Games home">
+      <svg viewBox="0 0 32 32" class="logo-mark" aria-hidden="true"><path d="M16 3 29 27H3Z" fill="currentColor"/></svg>
+      <span>Maek Games</span>
+    </a>
+    <div class="hud-note mono">INDEPENDENT GAME STUDIO — EST. 2019</div>
+  </header>
+
+  <nav class="nav-dots" aria-label="Acts">
+    <button class="nav-dot" data-tip="INTRO"><i></i></button>
+    <button class="nav-dot" data-tip="TURBO STRIKE"><i></i></button>
+    <button class="nav-dot" data-tip="ORACLE EYES"><i></i></button>
+    <button class="nav-dot" data-tip="APEX ZERO"><i></i></button>
+    <button class="nav-dot" data-tip="GOLDEN BOOT"><i></i></button>
+    <button class="nav-dot" data-tip="SKULLVIPER"><i></i></button>
+    <button class="nav-dot" data-tip="LEGENDS TCG"><i></i></button>
+    <button class="nav-dot" data-tip="BLOCKWAY EXPRESS"><i></i></button>
+    <button class="nav-dot" data-tip="GROUND ZERO"><i></i></button>
+  </nav>
+
+  <main id="panels" class="panels">
+
+    <!-- ACT 0 · HERO -->
+    <section class="panel panel-hero center" data-act="0">
+      <div class="hero-inner">
+        <p class="kicker mono">AAA-ADJACENT · INDEPENDENT · DANGEROUSLY AMBITIOUS</p>
+        <h1 class="mega">HYPER<span>NOVA</span></h1>
+        <p class="desc">Nine worlds. One studio. Zero filler. We craft games that hit like a detonation — scroll to run the reel.</p>
+        <div class="scroll-hint mono" aria-hidden="true">SCROLL<span class="wheel"></span></div>
       </div>
-     <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Play Free Football Style Minigames Online</h1>
-            <p>Fast, fun football-inspired browser games you can play instantly. No downloads, no accounts — just quick sports challenges like TikTak and more coming soon.</p>
-
-            <a href="/TikTak/" class="cta-btn">Play TikTak</a>
-        </div>
-
-        
-    <!-- IMAGE CAROUSEL -->
-    <div class="carousel">
-        <div class="carousel-track">
-            <img src="/Images/tiktak.jpg" alt="Football minigame screenshot">
-            <img src="/Images/tableball.jpg" alt="Gameplay preview">
-            <img src="/Images/PlinkoBoard.jpg" alt="Sports challenge preview">
-		    <img src="/Images/HitBurger.jpg" alt="Sports challenge preview">	
-        </div>
-
-        <button class="carousel-btn prev">❮</button>
-        <button class="carousel-btn next">❯</button>
-    </div>
-      
     </section>
 
-    <!-- GAMES GRID -->
-    <section class="games">
-        <h2>Featured Football Minigames</h2>
-
-        <div class="game-card">
-            <a href="/TikTak/">
-                <img src="/images/tiktak.jpg" alt="TikTak football minigame">
-            </a>
-            <h3>TikTak</h3>
-            <p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
-			<a href="/TikTak/" class="play-btn" id="playTikTak">Play Now</a>
-        </div>
-		
-		<div class="game-card">
-			<a href="/TableBall/">
-				<img src="/images/tableball.jpg" alt="TableBall football minigame">
-            </a>
-			<h3>TableBall</h3>
-			<p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
-			<a href="/TableBall/" class="play-btn" id="playTableBall">Play Now</a>
-		</div>
-
-		<div class="game-card">
-			<a href="/PlinkoBoard/">
-				<img src="/images/PlinkoBoard.jpg" alt="PlinkoBoard football minigame">
-            </a>
-			<h3>PlinkoBoard</h3>
-			<p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
-			<a href="/PlinkoBoard/" class="play-btn" id="playPlinko">Play Now</a>
-		</div>
-
-		<div class="game-card">
-			<a href="/HitBurger/">
-				<img src="/images/HitBurger.jpg" alt="HitBurger football minigame">
-            </a>
-			<h3>HitBurger</h3>
-			<p>A fast-paced football-style minigame with simple controls and quick matches. Perfect for short bursts of fun.</p>
-			<a href="/HitBurger/" class="play-btn" id="playHitBurger">Play Now</a>
-		</div>
-
-
-        <!-- Add more game cards here when new games launch -->
+    <!-- ACT 1 · BOWLING -->
+    <section class="panel left" data-act="1">
+      <span class="num" aria-hidden="true">01</span>
+      <p class="kicker mono">01 / ARCADE SPORTS</p>
+      <h2>TURBO STRIKE</h2>
+      <p class="desc">Bowling at 300&nbsp;km/h. Anti-grav lanes, reactive pins and a power meter that rewards pure nerve. Pick your ball. Break the deck.</p>
+      <ul class="meta mono">
+        <li>2024</li><li>PC / SWITCH</li><li>1.4M PLAYERS</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn solid" href="#act-1">WISHLIST ON STEAM</a>
+        <a class="btn ghost" href="#act-1">TRAILER ▸</a>
+      </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section class="about">
-        <h2>About Maek Games</h2>
-        <p>Maek Games creates lightweight browser minigames inspired by football and other sports. The goal is simple: quick, fun gameplay you can enjoy anytime without downloads or complicated menus.</p>
+    <!-- ACT 2 · EYES -->
+    <section class="panel right" data-act="2">
+      <span class="num" aria-hidden="true">02</span>
+      <p class="kicker mono">02 / COSMIC HORROR PUZZLE</p>
+      <h2>ORACLE EYES</h2>
+      <p class="desc">An old god watches every move you make. Read its gaze, feed it secrets, and maybe — just maybe — it blinks first.</p>
+      <ul class="meta mono">
+        <li>2025</li><li>PC / PS5</li><li>92% POSITIVE</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn solid" href="#act-2">WISHLIST ON STEAM</a>
+        <a class="btn ghost" href="#act-2">DEMO ▸</a>
+      </div>
     </section>
-  </section>
 
-  <footer>
-    © 2026 Maek Games / Studio — Built with ❤️
-    <a href="policy.html">Privacy Policy</a>
+    <!-- ACT 3 · CAR -->
+    <section class="panel left" data-act="3">
+      <span class="num" aria-hidden="true">03</span>
+      <p class="kicker mono">03 / ANTI-GRAV RACING</p>
+      <h2>APEX ZERO</h2>
+      <p class="desc">Magnetic circuits at 800&nbsp;km/h, zero grip and zero mercy. Slipstream, boost — and never, ever lift.</p>
+      <ul class="meta mono">
+        <li>2026</li><li>PC / PS5 / XSX</li><li>4K · 120FPS</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn solid" href="#act-3">WATCH TRAILER</a>
+        <a class="btn ghost" href="#act-3">DEVLOG ▸</a>
+      </div>
+    </section>
+
+    <!-- ACT 4 · FOOTBALL -->
+    <section class="panel right" data-act="4">
+      <span class="num" aria-hidden="true">04</span>
+      <p class="kicker mono">04 / FREE-KICK ARCADE</p>
+      <h2>GOLDEN BOOT</h2>
+      <p class="desc">Bend the ball past physics. Wall? What wall. Curve it, knuckle it, top-bins it — one swipe at a time.</p>
+      <ul class="meta mono">
+        <li>2023</li><li>MOBILE / PC</li><li>8M DOWNLOADS</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn solid" href="#act-4">PLAY FREE</a>
+        <a class="btn ghost" href="#act-4">SEASON 4 ▸</a>
+      </div>
+    </section>
+
+    <!-- ACT 5 · SERPENT -->
+    <section class="panel left" data-act="5">
+      <span class="num" aria-hidden="true">05</span>
+      <p class="kicker mono">05 / BONE ROGUELITE</p>
+      <h2>SKULLVIPER</h2>
+      <p class="desc">A serpent built from the skulls of its own failures. Feed the coil, grow the spine, die smarter every run.</p>
+      <ul class="meta mono">
+        <li>2026</li><li>PC</li><li>DEBUT SOON</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn solid" href="#act-5">WISHLIST ON STEAM</a>
+        <a class="btn ghost" href="#act-5">LORE ▸</a>
+      </div>
+    </section>
+
+    <!-- ACT 6 · CARD -->
+    <section class="panel right" data-act="6">
+      <span class="num" aria-hidden="true">06</span>
+      <p class="kicker mono">06 / FOOTBALL CARD BATTLER</p>
+      <h2>LEGENDS TCG</h2>
+      <p class="desc">Every card is a striker. Forge holos, chain synergies and pull the one card the meta fears.</p>
+      <ul class="meta mono">
+        <li>2025</li><li>PC / MOBILE</li><li>300+ CARDS</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn solid" href="#act-6">OPEN FIRST PACK</a>
+        <a class="btn ghost" href="#act-6">CARD LIST ▸</a>
+      </div>
+    </section>
+
+    <!-- ACT 7 · TRAIN -->
+    <section class="panel left" data-act="7">
+      <span class="num" aria-hidden="true">07</span>
+      <p class="kicker mono">07 / NIGHT ROUTE · HORROR SANDBOX</p>
+      <h2>BLOCKWAY EXPRESS</h2>
+      <p class="desc">The last train through the pines runs after dark. Keep your lamp lit, mind the graves by the platform — and never wave back at the passengers.</p>
+      <ul class="meta mono">
+        <li>2024</li><li>ROBLOX</li><li>12M VISITS</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn solid" href="#act-7">RIDE ON ROBLOX</a>
+        <a class="btn ghost" href="#act-7">UPDATE 12 ▸</a>
+      </div>
+    </section>
+
+    <!-- ACT 8 · FINALE / CONTACT -->
+    <section class="panel panel-finale center" data-act="8">
+      <p class="kicker mono">EPILOGUE / GROUND ZERO</p>
+      <h2 class="mega-2">MAKE SOMETHING<br><span>THAT DETONATES.</span></h2>
+      <p class="desc">That was the reel. Now let's build yours — our inbox is open for publishing, ports and strange ideas.</p>
+      <div class="cta-row">
+        <a class="btn solid" href="mailto:hello@hypernova.studio">HELLO@Maek Games.STUDIO</a>
+        <a class="btn ghost" href="#act-8">X / TWITTER</a>
+        <a class="btn ghost" href="#act-8">ITCH.IO</a>
+        <a class="btn ghost" href="#act-8">YOUTUBE</a>
+      </div>
+      <p class="fine mono">© 2026 Maek Games STUDIO — BUILT WITH THREE.JS · BEST EXPERIENCED ON A DESKTOP WITH SOUND-READY EARS</p>
+    </section>
+  </main>
+
+  <!-- countdown -->
+  <div id="countdown" class="countdown" aria-hidden="true">
+    <div class="cd-txt mono">TEST SITE 07 — FINAL CHECKS</div>
+    <div class="cd-num">3</div>
+  </div>
+
+  <!-- nuclear flash -->
+  <div id="flash" class="flash"></div>
+
+  <footer class="hud hud-bottom">
+    <div id="act-label" class="mono">ACT 01 / 09 — Maek Games</div>
+    <div class="hint mono" id="kb-hint">◄ ► ARROW KEYS TO JUMP ACTS</div>
   </footer>
 
+  <div id="progress" class="progress" aria-hidden="true"><div id="progress-bar"></div></div>
+  <div id="cursor" class="cursor" aria-hidden="true"></div>
+</div>
+
+<!-- ── scroll spacers (drive the native scrollbar) ─────────────────────── -->
+<div class="sections" aria-hidden="true">
+  <div class="sp-section" id="act-0" style="height:130vh"></div>
+  <div class="sp-section" id="act-1" style="height:170vh"></div>
+  <div class="sp-section" id="act-2" style="height:170vh"></div>
+  <div class="sp-section" id="act-3" style="height:170vh"></div>
+  <div class="sp-section" id="act-4" style="height:170vh"></div>
+  <div class="sp-section" id="act-5" style="height:170vh"></div>
+  <div class="sp-section" id="act-6" style="height:170vh"></div>
+  <div class="sp-section" id="act-7" style="height:170vh"></div>
+  <div class="sp-section" id="act-8" style="height:280vh"></div>
+</div>
+
+<!-- ── loader ──────────────────────────────────────────────────────────── -->
+<div id="loader" class="loader">
+  <div class="loader-inner">
+    <svg viewBox="0 0 32 32" class="loader-mark" aria-hidden="true"><path d="M16 3 29 27H3Z" fill="currentColor"/></svg>
+    <div class="loader-name">Maek Games</div>
+    <div class="loader-bar"><i></i></div>
+    <div class="loader-txt mono"><span id="loader-pct">0%</span> — CALIBRATING DETONATOR…</div>
+  </div>
+</div>
+
+<noscript><div class="noscript">Maek Games needs JavaScript + WebGL — this reel is fully 3D.</div></noscript>
+
+<script>
+window.__errors = [];
+addEventListener('error', e => window.__errors.push(`${e.message} @${(e.filename||'').split('/').pop()}:${e.lineno}:${e.colno}`));
+addEventListener('unhandledrejection', e => window.__errors.push('rejection: ' + String(e.reason)));
+</script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
